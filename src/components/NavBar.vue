@@ -8,11 +8,7 @@
 </template>
 
 <script>
-import SpaceForceLogo from '@/components/SpaceForceLogo.vue'
 export default {
-  components: {
-    SpaceForceLogo
-  },
   data() {
     return {
       pages: [

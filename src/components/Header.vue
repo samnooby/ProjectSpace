@@ -5,13 +5,6 @@
   </div>
 </template>
 
-<script>
-import SpaceForceLogo from '@/components/SpaceForceLogo.vue'
-export default {
-  components: {
-    SpaceForceLogo
-  }
-}
-</script>
+<script></script>
 
 <style scoped></style>
