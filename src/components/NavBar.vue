@@ -1,13 +1,18 @@
 <template>
-  <div>
-    <div v-for="page in pages" :key="page.id">
+  <div class="navbar">
+    <SpaceForceLogo id="navbar-logo"></SpaceForceLogo>
+    <div v-for="page in pages" :key="page.id" class="navbar-button">
       <router-link :to="{ name: page.name }">{{ page.name }}</router-link>
     </div>
   </div>
 </template>
 
 <script>
+import SpaceForceLogo from '@/components/SpaceForceLogo.vue'
 export default {
+  components: {
+    SpaceForceLogo
+  },
   data() {
     return {
       pages: [
