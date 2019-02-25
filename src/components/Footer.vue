@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <v-footer>
     <SpaceForceLogo></SpaceForceLogo>
     <p>SpaceForce</p>
     <p>Sam, Liam and Luka</p>
     <p>1233 Fairdale Dr</p>
-  </div>
+  </v-footer>
 </template>
 
 <script>

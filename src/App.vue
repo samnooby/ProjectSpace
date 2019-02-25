@@ -1,23 +1,14 @@
 <template>
-  <div id="app">
-    <Header></Header>
-    <NavBar></NavBar>
-    <router-view />
-    <Footer></Footer>
-  </div>
+  <Index></Index>
 </template>
 
 <script>
-import Header from '@/components/Header.vue'
-import NavBar from '@/components/NavBar.vue'
-import Footer from '@/components/Footer.vue'
+import Index from '@/views/Index.vue'
 
 export default {
   name: 'app',
   components: {
-    Header,
-    NavBar,
-    Footer
+    Index
   }
 }
 </script>

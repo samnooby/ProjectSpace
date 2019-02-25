@@ -1,10 +1,16 @@
 <template>
-  <div class="navbar">
-    <SpaceForceLogo id="navbar-logo"></SpaceForceLogo>
-    <div v-for="page in pages" :key="page.id" class="navbar-button">
-      <router-link :to="{ name: page.name }">{{ page.name }}</router-link>
-    </div>
-  </div>
+  <v-list app>
+    <v-list-tile
+      dense
+      v-for="page in pages"
+      :key="page.id"
+      class="navbar-button"
+    >
+      <v-list-tile-title>
+        <router-link :to="{ name: page.name }">{{ page.name }}</router-link>
+      </v-list-tile-title>
+    </v-list-tile>
+  </v-list>
 </template>
 
 <script>
