@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h1>This is a footer</h1>
+    <SpaceForceLogo></SpaceForceLogo>
+    <p>SpaceForce</p>
+    <p>Sam, Liam and Luka</p>
+    <p>1233 Fairdale Dr</p>
   </div>
 </template>
 
