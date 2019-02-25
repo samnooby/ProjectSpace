@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="page in pages" :key="page.id">
-      <router-link />
+      <router-link :to="{ name: page.name }">{{ page.name }}</router-link>
     </div>
   </div>
 </template>
