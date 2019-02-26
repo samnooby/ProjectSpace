@@ -15,13 +15,7 @@
       ></v-toolbar-side-icon>
     </v-toolbar>
 
-    <v-navigation-drawer
-      app
-      temporary
-      v-model="drawer"
-      class="primary"
-      height="auto"
-    >
+    <v-navigation-drawer app temporary v-model="drawer" class="primary">
       <NavBar></NavBar>
     </v-navigation-drawer>
   </div>
