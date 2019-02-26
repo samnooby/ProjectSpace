@@ -1,25 +1,19 @@
-import Vue from 'vue'
-import router from './router'
-import store from './store'
+import Vue from 'vue';
+import './plugins/vuetify';
+import router from './router';
+import store from './store';
 
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
-import { Ripple } from 'vuetify/lib/directives'
+import 'vuetify/dist/vuetify.min.css';
 
-import App from './App.vue'
-import SpaceForceLogo from '@/components/SpaceForceLogo.vue'
+import App from './App.vue';
+import SpaceForceLogo from '@/components/SpaceForceLogo.vue';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
-Vue.use(Vuetify, {
-  directives: {
-    Ripple
-  }
-})
-Vue.component('SpaceForceLogo', SpaceForceLogo)
+Vue.component('SpaceForceLogo', SpaceForceLogo);
 
 new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');
