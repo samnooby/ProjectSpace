@@ -1,5 +1,5 @@
 <template>
-  <v-card class="primary pa-2" width="100%">
+  <v-card flat class="third pa-2" width="100%">
     <div class="text-xs-center pa-2">
       <span class="font-weight-light grey--text">Space</span>
       <span class="font-weight-medium white--text">Force</span>
@@ -15,9 +15,6 @@
         :to="{ name: link.name }"
         class="ma-2"
       >
-        <v-list-tile-action>
-          <v-icon class="white--text">{{ link.icon }}</v-icon>
-        </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title class="white--text">
             {{ link.text }}
@@ -30,16 +27,11 @@
 
 <script>
 export default {
+  props: {
+    links: Array
+  },
   data() {
-    return {
-      links: [
-        { icon: 'home', name: 'home', text: 'Home' },
-        { icon: 'person', name: 'about', text: 'About' },
-        { icon: 'book', name: 'booking', text: 'Book Chillout' },
-        { icon: 'music_note', name: 'bowlsongs', text: 'Bowl Songs' },
-        { icon: 'work', name: 'currentprojects', text: 'Current Projects' }
-      ]
-    };
+    return {};
   }
 };
 </script>

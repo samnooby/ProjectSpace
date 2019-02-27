@@ -1,6 +1,9 @@
 <template>
-  <div class="home">
-    <h1>Homepage</h1>
+  <div class="background router-page">
+    <h1 class="text--text">Home</h1>
+    <v-container class="my-2 text--text">
+      <h1>Hey</h1>
+    </v-container>
   </div>
 </template>
 
