@@ -16,7 +16,7 @@
           router
           :to="{ name: link.name }"
           class="text--text secondary"
-          >{{ link.name }}</v-btn
+          >{{ link.propername }}</v-btn
         >
       </v-layout>
 

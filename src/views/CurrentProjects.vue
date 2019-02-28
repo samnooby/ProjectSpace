@@ -1,10 +1,14 @@
 <template>
   <div class="background router-page">
-    <h1 class="text--text">CurrentProjects</h1>
+    <h1 class="text--text display-3">CurrentProjects</h1>
     <v-container class="my-2">
       <div v-for="project in projects" :key="project.id">
-        <v-card flat class="white--text background text-xs-left">
-          <v-layout row wrap class="pa-3">
+        <v-card
+          flat
+          class="body--text secondary text-xs-left"
+          style="border-radius: 8px;"
+        >
+          <v-layout row wrap class="pa-3 my-2">
             <v-flex xs12 lg4>
               <div class="caption text--text">Project Title</div>
               <div>{{ project.title }}</div>
@@ -13,24 +17,36 @@
               <div class="caption text--text">Description</div>
               <div>{{ project.description }}</div>
             </v-flex>
-            <v-flex xs10 sm12 md10 lg2 class="pl-2">
+            <v-flex xs9 sm12 md9 lg2 class="pl-2">
               <div class="caption text--text">Expected Finish</div>
               <div>{{ project.expected }}</div>
             </v-flex>
-            <v-flex xs2 class="mt-4">
+            <v-flex xs3 class="mt-4">
               <v-chip
                 small
-                :class="`${project.status} white--text caption ma-2`"
-                >{{ project.status }}</v-chip
+                v-bind:class="{
+                  InProgress: project.progress != 100,
+                  Complete: project.progress == 100,
+                  Closing: project.progress == 0
+                }"
+                class="text--text caption ma-2`"
               >
+                {{
+                  project.progress != 100
+                    ? project.progress == 0
+                      ? 'Closed'
+                      : 'In Progress'
+                    : 'Completed'
+                }}
+              </v-chip>
             </v-flex>
-            <v-flex xs12 sm10 md12 lg10 class="my-2">
+            <v-flex xs12 sm9 md12 lg9 class="my-2">
               <div class="caption text-xs-center text--text">
                 Current Progress
               </div>
               <v-progress-linear
                 :value="project.progress"
-                background-color="#2b2a38"
+                background-color="body"
                 color="#4993c1"
               ></v-progress-linear>
             </v-flex>
@@ -44,48 +60,26 @@
 
 <script>
 export default {
+  props: {
+    projects: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
-    return {
-      projects: [
-        {
-          id: 1,
-          title: 'Bowl Song Generator',
-          description: 'A app that generates a new song to smoke your bowl to',
-          expected: '02/05/2019',
-          status: 'inprogress',
-          progress: 5
-        },
-        {
-          id: 2,
-          title: 'Trap or Not Ai',
-          description:
-            'Ai that helps find out if that person at the bar is a girl or a trap',
-          expected: '01/01/2020',
-          status: 'inprogress',
-          progress: 5
-        },
-        {
-          id: 3,
-          title: 'Website App',
-          description: 'A android app for the official SpaceForce Website',
-          expected: '01/02/2023',
-          status: 'inprogress',
-          progress: 5
-        }
-      ]
-    };
+    return {};
   }
 };
 </script>
 
 <style scoped>
-.complete {
+.Complete {
   background: #5fc149;
 }
-.inprogress {
+.InProgress {
   background: #4993c1;
 }
-.closing {
+.Closing {
   background: #c14949;
 }
 </style>

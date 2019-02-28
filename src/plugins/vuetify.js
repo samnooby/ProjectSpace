@@ -9,9 +9,11 @@ Vue.use(Vuetify, {
     secondary: '#2b2a38',
     third: '#1d1c2a',
     background: '#84838c',
-    text: '#535356',
+    text: '#9d9da0',
     accent: '#617287',
     error: '#b71c1c',
-    info: '#8787a5'
+    info: '#8787a5',
+    body: '#9faec6',
+    headerbutton: '#ffffff'
   }
 });

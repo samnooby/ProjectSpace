@@ -16,9 +16,9 @@
         class="ma-2"
       >
         <v-list-tile-content>
-          <v-list-tile-title class="white--text">
-            {{ link.text }}
-          </v-list-tile-title>
+          <v-list-tile-title class="white--text">{{
+            link.propername
+          }}</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
