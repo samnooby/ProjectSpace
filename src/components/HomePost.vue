@@ -24,7 +24,7 @@
             style="border-radius:3px;"
             v-if="hasImage()"
           >
-            <v-img :aspect-ratio="16 / 9" v-bind:src="FileImage">
+            <v-img :aspect-ratio="16 / 9" v-bind:src="FileImage.imageURL">
               <div
                 class="hidden-md-and-up"
                 style="height: 100%; display:flex; align-items: center; justify-content:center;"
@@ -85,7 +85,7 @@ export default {
       required: true
     },
     FileImage: {
-      type: String
+      type: Object
     }
   },
   data() {

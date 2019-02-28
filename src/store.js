@@ -10,7 +10,16 @@ const homeModule = {
   },
   mutations: {
     ADD_POST(state, post) {
+      var currentId = Math.max.apply(
+        Math,
+        state.homeposts.map(function(o) {
+          return o.id;
+        })
+      );
+      console.log(currentId);
+      post.id = currentId + 1;
       state.homeposts.push(post);
+      console.log(state.homeposts);
     },
     REMOVE_POST(state, id) {
       var i;

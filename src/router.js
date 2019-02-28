@@ -11,6 +11,5 @@ export default new Router({
 });
 
 function getRoutes() {
-  console.log(AppData.Links);
   return AppData.Links;
 }

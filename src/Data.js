@@ -39,63 +39,82 @@ export const AppData = {
   ],
   Projects: [
     {
-      id: 1,
-      title: 'Bowl Song Generator',
-      description: 'A app that generates a new song to smoke your bowl to',
-      expected: '02/05/2019',
-      status: 'InProgress',
-      progress: 25
+      id: 0,
+      title: 'This Website',
+      description: 'Making the official space force website',
+      expected: '01/02/2023',
+      progress: 50
     },
     {
-      id: 2,
+      id: 1,
       title: 'Trap or Not Ai',
       description:
         'Ai that helps find out if that person at the bar is a girl or a trap',
       expected: '01/01/2020',
-      status: 'InProgress',
+      progress: 5
+    },
+    {
+      id: 2,
+      title: 'Website App',
+      description: 'A android app for the official SpaceForce Website',
+      expected: '01/02/2023',
       progress: 5
     },
     {
       id: 3,
-      title: 'Website App',
-      description: 'A android app for the official SpaceForce Website',
-      expected: '01/02/2023',
+      title: 'Weed Growing',
+      description: 'Growing weed',
+      expected: '01/02/2030',
       status: 'InProgress',
-      progress: 5
+      progress: 10
+    },
+    {
+      id: 4,
+      title: 'Bar',
+      description: 'Building a bar for the house',
+      expected: '01/02/2023',
+      progress: 0
+    },
+    {
+      id: 5,
+      title: 'Bowl Song Generator',
+      description: 'A app that generates a new song to smoke your bowl to',
+      expected: '02/05/2019',
+      progress: 25
     }
   ],
   HomePosts: [
     {
-      id: 1,
+      id: 0,
       date: new Date(),
       owner: 'sam',
       text: '<span class="red"> This is a test </span>',
-      img: require('@/static/logo.png'),
+      img: { imageURL: require('@/static/logo.png') },
       title: 'The First Post'
     },
     {
-      id: 2,
+      id: 1,
       date: new Date(),
       owner: 'sam',
       text: 'hey the is a test to the site',
       title: 'The Second Post'
     },
     {
-      id: 4,
+      id: 2,
       date: new Date(),
       owner: 'sam',
       text: 'hey the is a test to the site',
       title: 'The third Post'
     },
     {
-      id: 5,
+      id: 3,
       date: new Date(),
       owner: 'sam',
       text: 'hey the is a test to the site',
       title: 'The Fourth Post'
     },
     {
-      id: 6,
+      id: 4,
       date: new Date(),
       owner: 'sam',
       text: 'hey the is a test to the site',

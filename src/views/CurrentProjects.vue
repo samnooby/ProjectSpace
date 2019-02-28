@@ -23,13 +23,9 @@
             </v-flex>
             <v-flex xs3 class="mt-4">
               <v-chip
+                :style="style(project.progress)"
                 small
-                v-bind:class="{
-                  InProgress: project.progress != 100,
-                  Complete: project.progress == 100,
-                  Closing: project.progress == 0
-                }"
-                class="text--text caption ma-2`"
+                class="text--text caption ma-2 Closing"
               >
                 {{
                   project.progress != 100
@@ -68,18 +64,17 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    style(progress) {
+      return progress != 100
+        ? progress == 0
+          ? 'background: #c14949;'
+          : 'background: #4993c1;'
+        : 'background: #5fc149;';
+    }
   }
 };
 </script>
 
-<style scoped>
-.Complete {
-  background: #5fc149;
-}
-.InProgress {
-  background: #4993c1;
-}
-.Closing {
-  background: #c14949;
-}
-</style>
+<style></style>
