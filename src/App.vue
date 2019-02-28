@@ -1,7 +1,7 @@
 <template>
   <v-app class="primary ma-0 pa-0">
     <Header :links="getLinks" class="mb-5" />
-    <div class="pl-0 pr-0" style="height: 97vh;">
+    <div class="pl-0 pr-0" style="height: 93vh;">
       <v-container class="mt-2 pa-0 heightfill">
         <v-layout row wrap class="heightfill">
           <v-flex xs12 class="heightfill px-4">
@@ -56,11 +56,11 @@ export default {
       Velocity(
         el,
         { opacity: 1 },
-        { duration: 500, delay: 500, complete: done }
+        { duration: 300, delay: 300, complete: done }
       );
     },
     leave(el, done) {
-      Velocity(el, { opacity: 0 }, { duration: 500, complete: done });
+      Velocity(el, { opacity: 0 }, { duration: 300, complete: done });
     }
   },
   mounted: function() {
@@ -81,7 +81,7 @@ export default {
 .heightfill {
   height: 100%;
 }
-#router::-webkit-scrollbar {
+::-webkit-scrollbar {
   display: none;
 }
 </style>
