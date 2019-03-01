@@ -120,5 +120,25 @@ export const AppData = {
       text: 'hey the is a test to the site',
       title: 'The Fifth Post'
     }
+  ],
+  AboutPage: [
+    {
+      id: 0,
+      owner: 'Sam',
+      posttext: 'This is information about Sam',
+      img: { imageURL: require('@/static/logo.png') }
+    },
+    {
+      id: 1,
+      owner: 'Luka',
+      posttext: 'This is information about Luka',
+      img: { imageURL: require('@/static/logo.png') }
+    },
+    {
+      id: 2,
+      owner: 'Liam',
+      posttext: 'This is information about Liam',
+      img: { imageURL: require('@/static/logo.png') }
+    }
   ]
 };

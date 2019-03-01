@@ -4,6 +4,18 @@ import { AppData } from './Data.js';
 
 Vue.use(Vuex);
 
+const aboutModule = {
+  state: {
+    aboutData: AppData.AboutPage
+  },
+  mutations: {},
+  getters: {
+    getAbout(state) {
+      return state.aboutData;
+    }
+  }
+};
+
 const homeModule = {
   state: {
     homeposts: AppData.HomePosts
@@ -94,7 +106,8 @@ const projectsModule = {
 export default new Vuex.Store({
   modules: {
     home: homeModule,
-    projects: projectsModule
+    projects: projectsModule,
+    about: aboutModule
   },
   state: {
     links: AppData.Links
