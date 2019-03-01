@@ -38,12 +38,9 @@
           </v-flex>
 
           <v-flex xs12 md6>
-            <v-card-text class="body--text text-xs-left">
-              {{ Text }}
-            </v-card-text>
-          </v-flex>
-          <v-flex xs12>
-            <v-card-actions></v-card-actions>
+            <v-card-text class="body--text text-xs-left">{{
+              Text
+            }}</v-card-text>
           </v-flex>
         </v-layout>
 
@@ -56,6 +53,17 @@
           <v-spacer></v-spacer>
           <span class="caption">Posted by {{ Owner }}</span>
         </v-footer>
+
+        <v-card class="third" v-if="Comments">
+          <v-layout row wrap>
+            <v-flex xs12>
+              <h1 class="text--text">Comments</h1>
+            </v-flex>
+            <v-flex xs10 offset-xs1>
+              <p>{{ Comments[0].text }}</p>
+            </v-flex>
+          </v-layout>
+        </v-card>
       </v-card>
     </v-flex>
   </v-layout>
@@ -86,6 +94,9 @@ export default {
     },
     FileImage: {
       type: Object
+    },
+    Comments: {
+      type: Array
     }
   },
   data() {

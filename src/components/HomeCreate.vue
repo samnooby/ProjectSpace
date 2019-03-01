@@ -2,7 +2,7 @@
   <div>
     <v-card class="secondary text--text">
       <v-card-title class="display-1">
-        <span v-if="hastitle == true">Make a new post {{ hastitle }}</span>
+        <span v-if="hastitle == 'true'">Make a new post</span>
       </v-card-title>
       <v-card-text>
         <v-container grid>

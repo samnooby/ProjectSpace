@@ -90,35 +90,70 @@ export const AppData = {
       owner: 'sam',
       text: '<span class="red"> This is a test </span>',
       img: { imageURL: require('@/static/logo.png') },
-      title: 'The First Post'
+      title: 'The First Post',
+      comments: [
+        {
+          id: 0,
+          text: 'This is a comment',
+          user: 'this is the user'
+        }
+      ]
     },
     {
       id: 1,
       date: new Date(),
       owner: 'sam',
       text: 'hey the is a test to the site',
-      title: 'The Second Post'
+      title: 'The Second Post',
+      comments: [
+        {
+          id: 0,
+          text: 'This is a comment',
+          user: 'this is the user'
+        }
+      ]
     },
     {
       id: 2,
       date: new Date(),
       owner: 'sam',
       text: 'hey the is a test to the site',
-      title: 'The third Post'
+      title: 'The third Post',
+      comments: [
+        {
+          id: 0,
+          text: 'This is a comment',
+          user: 'this is the user'
+        }
+      ]
     },
     {
       id: 3,
       date: new Date(),
       owner: 'sam',
       text: 'hey the is a test to the site',
-      title: 'The Fourth Post'
+      title: 'The Fourth Post',
+      comments: [
+        {
+          id: 0,
+          text: 'This is a comment',
+          user: 'this is the user'
+        }
+      ]
     },
     {
       id: 4,
       date: new Date(),
       owner: 'sam',
       text: 'hey the is a test to the site',
-      title: 'The Fifth Post'
+      title: 'The Fifth Post',
+      comments: [
+        {
+          id: 0,
+          text: 'This is a comment',
+          user: 'this is the user'
+        }
+      ]
     }
   ],
   AboutPage: [

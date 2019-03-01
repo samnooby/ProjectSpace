@@ -5,13 +5,13 @@
       <v-layout>
         <v-flex xs12 class="secondary">
           <v-card class="secondary">
-            <v-expansion-panel v-model="newpost" class="hidden-sm-and-down">
+            <v-expansion-panel :v-model="newpost" class="hidden-sm-and-down">
               <v-expansion-panel-content class="third text--text">
                 <template v-slot:header>
                   <h1>Create Post</h1>
                 </template>
                 <v-card>
-                  <HomeCreate hastitle="false" @closemenu="close" />
+                  <HomeCreate :hastitle="false" @closemenu="close" />
                 </v-card>
               </v-expansion-panel-content>
             </v-expansion-panel>
@@ -26,6 +26,7 @@
           :FileImage="post.img"
           :Text="post.text"
           :Title="post.title"
+          :Comments="post.comments"
         />
       </div>
     </v-container>
