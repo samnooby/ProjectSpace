@@ -13,6 +13,7 @@
                 label="Post Title*"
                 required
                 dark
+                :maxlength="70"
               ></v-text-field>
             </v-flex>
             <v-flex xs12 offset-sm1 sm5>
@@ -20,6 +21,7 @@
                 v-model="postowner"
                 label="Post Owner"
                 dark
+                :maxlength="50"
               ></v-text-field>
             </v-flex>
             <v-flex xs12>
@@ -27,6 +29,8 @@
                 v-model="posttext"
                 label="Post Text*"
                 dark
+                :maxlength="500"
+                :minlength="21"
               ></v-textarea>
             </v-flex>
             <v-flex xs2>
@@ -76,9 +80,22 @@ export default {
   methods: {
     ...mapActions(['addPost']),
     addImage(img) {
-      this.postpic = img;
+      this.postpic = img.imageURL;
     },
     uploadPost() {
+      var d = new Date();
+      var makeDate =
+        d.getFullYear() +
+        '-' +
+        d.getMonth() +
+        '-' +
+        d.getDate() +
+        ' ' +
+        d.getHours() +
+        ':' +
+        d.getMinutes() +
+        ':' +
+        d.getSeconds();
       if (this.posttitle == '') {
         this.error = true;
       } else if (this.posttext == '') {
@@ -90,11 +107,11 @@ export default {
         }
         var post = {
           id: -1,
-          date: new Date(),
+          created_at: makeDate,
           owner: this.postowner,
           text: this.posttext,
           title: this.posttitle,
-          img: this.postpic
+          imageLink: this.postpic
         };
         this.addPost(post);
 

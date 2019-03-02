@@ -5,8 +5,11 @@
       <v-layout>
         <v-flex xs12 class="secondary">
           <v-card class="secondary">
-            <v-expansion-panel :v-model="newpost" class="hidden-sm-and-down">
-              <v-expansion-panel-content class="third text--text">
+            <v-expansion-panel class="hidden-sm-and-down">
+              <v-expansion-panel-content
+                v-model="newposttop"
+                class="third text--text"
+              >
                 <template v-slot:header>
                   <h1>Create Post</h1>
                 </template>
@@ -21,12 +24,12 @@
       <div v-for="post in homeposts" :key="post.id">
         <HomePost
           :Id="post.id"
-          :PostDate="post.date"
+          :PostDate="post.created_at"
           :Owner="post.owner"
-          :FileImage="post.img"
+          :FileImage="post.imageLink"
           :Text="post.text"
           :Title="post.title"
-          :Comments="post.comments"
+          :Comments="comments"
         />
       </div>
     </v-container>
@@ -49,7 +52,7 @@
             >
           </v-btn>
         </template>
-        <span>Make New Post</span>
+        <span>Make News Post</span>
       </v-tooltip>
     </div>
   </div>
@@ -72,12 +75,21 @@ export default {
   },
   data() {
     return {
-      newpost: false
+      newpost: false,
+      newposttop: false,
+      comments: [
+        {
+          id: 0,
+          text: 'This is a comment',
+          user: 'this is the user'
+        }
+      ]
     };
   },
   methods: {
     close() {
       this.newpost = false;
+      this.newposttop = false;
     }
   }
 };

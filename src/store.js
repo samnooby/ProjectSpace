@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
 import { AppData } from './Data.js';
 
-Vue.use(Vuex);
+Vue.use(Vuex, axios);
 
 const aboutModule = {
   state: {
@@ -18,9 +19,12 @@ const aboutModule = {
 
 const homeModule = {
   state: {
-    homeposts: AppData.HomePosts
+    homeposts: []
   },
   mutations: {
+    SET_POSTS(state, posts) {
+      state.homeposts = posts;
+    },
     ADD_POST(state, post) {
       var currentId = Math.max.apply(
         Math,
@@ -28,10 +32,8 @@ const homeModule = {
           return o.id;
         })
       );
-      console.log(currentId);
       post.id = currentId + 1;
       state.homeposts.push(post);
-      console.log(state.homeposts);
     },
     REMOVE_POST(state, id) {
       var i;
@@ -55,6 +57,22 @@ const homeModule = {
   actions: {
     addPost(context, post) {
       context.commit('ADD_POST', post);
+      console.log(post);
+      axios
+        .post('https://spaceschedule.herokuapp.com/api/articles/create', post)
+        .then(response => {
+          console.log(response);
+        });
+    },
+    setPosts(context) {
+      axios
+        .get('https://spaceschedule.herokuapp.com/api/articles')
+        .then(response => {
+          context.commit('SET_POSTS', response.data.articles);
+        })
+        .then(response => {
+          console.log(response);
+        });
     }
   },
   getters: {

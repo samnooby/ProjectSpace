@@ -24,7 +24,7 @@
             style="border-radius:3px;"
             v-if="hasImage()"
           >
-            <v-img :aspect-ratio="16 / 9" v-bind:src="FileImage.imageURL">
+            <v-img :aspect-ratio="16 / 9" v-bind:src="FileImage">
               <div
                 class="hidden-md-and-up"
                 style="height: 100%; display:flex; align-items: center; justify-content:center;"
@@ -45,11 +45,7 @@
         </v-layout>
 
         <v-footer card class="text--text secondary mx-3 px-2">
-          <span class="caption">
-            {{ PostDate.getDate() }}/{{ PostDate.getMonth() }}/{{
-              PostDate.getFullYear()
-            }}
-          </span>
+          <span class="caption">{{ PostDate }}</span>
           <v-spacer></v-spacer>
           <span class="caption">Posted by {{ Owner }}</span>
         </v-footer>
@@ -81,8 +77,8 @@ export default {
       required: true
     },
     PostDate: {
-      type: Date,
-      default: new Date().getDate()
+      type: String,
+      required: true
     },
     Owner: {
       type: String,
@@ -93,7 +89,7 @@ export default {
       required: true
     },
     FileImage: {
-      type: Object
+      type: String
     },
     Comments: {
       type: Array

@@ -35,6 +35,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 import Velocity from 'velocity-animate';
 
 export default {
@@ -50,6 +51,7 @@ export default {
     ...mapGetters(['getPosts', 'getLinks', 'getProjects', 'getAbout'])
   },
   methods: {
+    ...mapActions(['setPosts']),
     beforeenter(el) {
       el.style.opacity = 0;
     },
@@ -63,6 +65,9 @@ export default {
     leave(el, done) {
       Velocity(el, { opacity: 0 }, { duration: 300, complete: done });
     }
+  },
+  created() {
+    this.setPosts();
   }
 };
 </script>
