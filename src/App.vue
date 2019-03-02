@@ -17,6 +17,7 @@
                   :projects="getProjects"
                   :homeposts="getPosts"
                   :aboutposts="getAbout"
+                  :songs="getSongs"
                   class="mt-3 pa-0 heightfill"
                   style=" overflow: auto; "
                   id="router"
@@ -48,10 +49,16 @@ export default {
     Footer
   },
   computed: {
-    ...mapGetters(['getPosts', 'getLinks', 'getProjects', 'getAbout'])
+    ...mapGetters([
+      'getPosts',
+      'getLinks',
+      'getProjects',
+      'getAbout',
+      'getSongs'
+    ])
   },
   methods: {
-    ...mapActions(['setPosts']),
+    ...mapActions(['setPosts', 'setSongs']),
     beforeenter(el) {
       el.style.opacity = 0;
     },
@@ -68,6 +75,7 @@ export default {
   },
   created() {
     this.setPosts();
+    this.setSongs();
   }
 };
 </script>

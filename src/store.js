@@ -121,11 +121,40 @@ const projectsModule = {
   }
 };
 
+const bowlSongModule = {
+  state: {
+    songs: []
+  },
+  mutations: {
+    SET_SONGS(state, songs) {
+      state.songs = songs;
+    }
+  },
+  actions: {
+    setSongs(context) {
+      axios
+        .get('https://spaceschedule.herokuapp.com/api/bowlsongs')
+        .then(response => {
+          context.commit('SET_SONGS', response.data.bowlSongs);
+        })
+        .then(response => {
+          console.log(response);
+        });
+    }
+  },
+  getters: {
+    getSongs(state) {
+      return state.songs;
+    }
+  }
+};
+
 export default new Vuex.Store({
   modules: {
     home: homeModule,
     projects: projectsModule,
-    about: aboutModule
+    about: aboutModule,
+    bowlsongs: bowlSongModule
   },
   state: {
     links: AppData.Links

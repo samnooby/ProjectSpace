@@ -17,11 +17,11 @@
               <div class="caption text--text">Description</div>
               <div>{{ project.description }}</div>
             </v-flex>
-            <v-flex xs9 sm12 md9 lg2 class="pl-2">
+            <v-flex xs12 sm9 lg2>
               <div class="caption text--text">Expected Finish</div>
               <div>{{ project.expected }}</div>
             </v-flex>
-            <v-flex xs3 class="mt-4">
+            <v-flex xs12 sm3 class="mt-4">
               <v-chip
                 :style="style(project.progress)"
                 small
@@ -36,7 +36,7 @@
                 }}
               </v-chip>
             </v-flex>
-            <v-flex xs12 sm9 md12 lg9 class="my-2">
+            <v-flex xs12 lg9 class="my-2">
               <div class="caption text-xs-center text--text">
                 Current Progress
               </div>

@@ -29,7 +29,7 @@
           :FileImage="post.imageLink"
           :Text="post.text"
           :Title="post.title"
-          :Comments="comments"
+          :Comments="post.comments"
         />
       </div>
     </v-container>
@@ -59,8 +59,8 @@
 </template>
 
 <script>
-import HomePost from '@/components/HomePost';
-import HomeCreate from '@/components/HomeCreate';
+import HomePost from '@/components/Home/HomePost';
+import HomeCreate from '@/components/Home/HomeCreate';
 
 export default {
   components: {
@@ -76,14 +76,7 @@ export default {
   data() {
     return {
       newpost: false,
-      newposttop: false,
-      comments: [
-        {
-          id: 0,
-          text: 'This is a comment',
-          user: 'this is the user'
-        }
-      ]
+      newposttop: false
     };
   },
   methods: {

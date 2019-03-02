@@ -80,7 +80,7 @@ export const AppData = {
       title: 'Bowl Song Generator',
       description: 'A app that generates a new song to smoke your bowl to',
       expected: '02/05/2019',
-      progress: 25
+      progress: 60
     }
   ],
   AboutPage: [
@@ -94,7 +94,10 @@ export const AppData = {
       id: 1,
       owner: 'Luka',
       posttext: 'This is information about Luka',
-      img: { imageURL: require('@/static/logo.png') }
+      img: {
+        imageURL:
+          'https://res.cloudinary.com/lukabuz/image/upload/inzzvhwh6eqifffsrgej'
+      }
     },
     {
       id: 2,

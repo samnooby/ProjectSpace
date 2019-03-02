@@ -55,8 +55,10 @@
             <v-flex xs12>
               <h1 class="text--text">Comments</h1>
             </v-flex>
-            <v-flex xs10 offset-xs1>
-              <p>{{ Comments[0].text }}</p>
+            <v-flex v-if="Comment" xs10 offset-xs1>
+              <v-card v-for="comment in Comments" :key="comment.id">
+                <p>{{ comment.text }}</p>
+              </v-card>
             </v-flex>
           </v-layout>
         </v-card>
@@ -92,7 +94,8 @@ export default {
       type: String
     },
     Comments: {
-      type: Array
+      type: Array,
+      required: false
     }
   },
   data() {
