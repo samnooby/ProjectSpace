@@ -15,7 +15,7 @@
         :to="{ name: link.name }"
         class="ma-2"
       >
-        <v-list-tile-content>
+        <v-list-tile-content v-if="!link.hidden">
           <v-list-tile-title class="white--text">{{
             link.propername
           }}</v-list-tile-title>

@@ -29,7 +29,6 @@
           :FileImage="post.imageLink"
           :Text="post.text"
           :Title="post.title"
-          :Comments="post.comments"
         />
       </div>
     </v-container>

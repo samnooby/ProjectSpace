@@ -57,11 +57,7 @@ export default {
           this.errorDialog = true;
           this.errorText = 'Your file is too big!';
         } else {
-          let formData = new FormData();
-          let imageURL = URL.createObjectURL(imageFile);
-          formData.append(fieldName, imageFile);
-
-          this.$emit('input', { formData, imageURL });
+          this.$emit('input', imageFile);
         }
       }
     }

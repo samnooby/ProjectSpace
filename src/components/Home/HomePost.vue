@@ -37,10 +37,29 @@
             </v-img>
           </v-flex>
 
-          <v-flex xs12 md6>
-            <v-card-text class="body--text text-xs-left">{{
-              Text
-            }}</v-card-text>
+          <v-flex xs12 md6 v-if="hasImage()">
+            <v-card-text>
+              <div>
+                <p
+                  style="overflow-wrap: break-word;"
+                  class="body--text text-xs-left"
+                >
+                  {{ Text }}
+                </p>
+              </div>
+            </v-card-text>
+          </v-flex>
+          <v-flex xs12 v-if="!hasImage()">
+            <v-card-text>
+              <div>
+                <p
+                  style="overflow-wrap: break-word;"
+                  class="body--text text-xs-left"
+                >
+                  {{ Text }}
+                </p>
+              </div>
+            </v-card-text>
           </v-flex>
         </v-layout>
 
@@ -49,19 +68,6 @@
           <v-spacer></v-spacer>
           <span class="caption">Posted by {{ Owner }}</span>
         </v-footer>
-
-        <v-card class="third" v-if="Comments">
-          <v-layout row wrap>
-            <v-flex xs12>
-              <h1 class="text--text">Comments</h1>
-            </v-flex>
-            <v-flex v-if="Comment" xs10 offset-xs1>
-              <v-card v-for="comment in Comments" :key="comment.id">
-                <p>{{ comment.text }}</p>
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-card>
       </v-card>
     </v-flex>
   </v-layout>
@@ -91,10 +97,7 @@ export default {
       required: true
     },
     FileImage: {
-      type: String
-    },
-    Comments: {
-      type: Array,
+      type: String,
       required: false
     }
   },

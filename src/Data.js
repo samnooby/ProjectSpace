@@ -3,6 +3,7 @@ import About from './views/About.vue';
 import Booking from './views/Booking.vue';
 import BowlSongs from './views/BowlSongs.vue';
 import CurrentProjects from './views/CurrentProjects.vue';
+import ErrorPage from './views/ErrorPage.vue';
 
 export const AppData = {
   Links: [
@@ -10,7 +11,8 @@ export const AppData = {
       path: '/',
       name: 'home',
       propername: 'Home',
-      component: Home
+      component: Home,
+      hidden: true
     },
     {
       path: '/about',
@@ -35,6 +37,13 @@ export const AppData = {
       name: 'currentprojects',
       propername: 'Current Projects',
       component: CurrentProjects
+    },
+    {
+      path: '/ERROR',
+      name: 'error',
+      propername: 'ERROR',
+      component: ErrorPage,
+      hidden: true
     }
   ],
   Projects: [
@@ -105,5 +114,8 @@ export const AppData = {
       posttext: 'This is information about Liam',
       img: { imageURL: require('@/static/logo.png') }
     }
-  ]
+  ],
+  LOADING: 0,
+  SUCCESS: 1,
+  FAIL: 2
 };

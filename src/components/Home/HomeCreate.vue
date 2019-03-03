@@ -2,7 +2,7 @@
   <div>
     <v-card class="secondary text--text">
       <v-card-title class="display-1">
-        <span v-if="hastitle == 'true'">Make a new post</span>
+        <span v-if="hastitle == true">Make a new post</span>
       </v-card-title>
       <v-card-text>
         <v-container grid>
@@ -36,12 +36,12 @@
             <v-flex xs2>
               <ImageUploader @input="addImage">
                 <div slot="activator">
-                  <v-btn class="info">Add Image</v-btn>
+                  <v-btn class="info">{{ posttitle }}</v-btn>
                 </div>
               </ImageUploader>
             </v-flex>
             <v-flex xs2>
-              <p caption v-if="postpic" class="mt-3">Image Added</p>
+              <p caption v-if="hasimage" class="mt-3">Image Added</p>
             </v-flex>
             <v-flex offset-xs6 xs2>
               <v-btn @click="uploadPost" class="info">Submit</v-btn>
@@ -74,16 +74,20 @@ export default {
       posttitle: '',
       posttext: '',
       postowner: '',
-      error: false
+      error: false,
+      hasimage: false
     };
   },
   methods: {
     ...mapActions(['addPost']),
     addImage(img) {
-      this.postpic = img.imageURL;
+      this.postpic = img;
+      this.hasimage = true;
     },
     uploadPost() {
       var d = new Date();
+      var post = new FormData();
+
       var makeDate =
         d.getFullYear() +
         '-' +
@@ -105,14 +109,16 @@ export default {
         if (owner == '') {
           owner = 'Anonymous';
         }
-        var post = {
-          id: -1,
-          created_at: makeDate,
-          owner: this.postowner,
-          text: this.posttext,
-          title: this.posttitle,
-          imageLink: this.postpic
-        };
+
+        if (this.postpic != null) {
+          post.append('image', this.postpic);
+        }
+        post.append('created_at', makeDate);
+        post.append('owner', owner);
+        post.append('text', this.posttext);
+        post.append('title', this.posttitle);
+        post.append('id', -1);
+
         this.addPost(post);
 
         this.postowner = '';
@@ -120,6 +126,7 @@ export default {
         this.posttitle = '';
         this.postpic = null;
         this.newpost = false;
+        this.hasimage = false;
 
         this.closeMenu();
       }

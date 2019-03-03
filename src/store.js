@@ -19,20 +19,14 @@ const aboutModule = {
 
 const homeModule = {
   state: {
-    homeposts: []
+    homeposts: [],
+    homestatus: AppData.LOADING
   },
   mutations: {
     SET_POSTS(state, posts) {
       state.homeposts = posts;
     },
     ADD_POST(state, post) {
-      var currentId = Math.max.apply(
-        Math,
-        state.homeposts.map(function(o) {
-          return o.id;
-        })
-      );
-      post.id = currentId + 1;
       state.homeposts.push(post);
     },
     REMOVE_POST(state, id) {
@@ -52,26 +46,48 @@ const homeModule = {
           i = state.homeposts.length;
         }
       }
+    },
+    GET_POST_ID(state, post) {
+      var currentId = Math.max.apply(
+        Math,
+        state.homeposts.map(function(o) {
+          return o.id;
+        })
+      );
+      post.id = currentId + 1;
+    },
+    SET_HOME_STATUS(state, status) {
+      state.homestatus = status;
     }
   },
   actions: {
-    addPost(context, post) {
-      context.commit('ADD_POST', post);
-      console.log(post);
+    addPost({ commit }, post) {
+      commit('GET_POST_ID', post);
+      commit('SET_HOME_STATUS', AppData.LOADING);
+
       axios
-        .post('https://spaceschedule.herokuapp.com/api/articles/create', post)
+        .post('https://spaceschedule.herokuapp.com/api/articles/create', post, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        })
         .then(response => {
+          commit('ADD_POST', response.data.article);
+          commit('SET_HOME_STATUS', AppData.SUCCESS);
           console.log(response);
+        })
+        .catch(() => {
+          commit('SET_HOME_STATUS', AppData.ERROR);
         });
     },
     setPosts(context) {
+      context.commit('SET_HOME_STATUS', AppData.LOADING);
       axios
         .get('https://spaceschedule.herokuapp.com/api/articles')
         .then(response => {
           context.commit('SET_POSTS', response.data.articles);
+          context.commit('SET_HOME_STATUS', AppData.SUCCESS);
         })
-        .then(response => {
-          console.log(response);
+        .catch(() => {
+          context.commit('SET_HOME_STATUS', AppData.ERROR);
         });
     }
   },
@@ -123,22 +139,29 @@ const projectsModule = {
 
 const bowlSongModule = {
   state: {
-    songs: []
+    songs: [],
+    bowlsongstatus: false
   },
   mutations: {
     SET_SONGS(state, songs) {
       state.songs = songs;
+    },
+    SET_BOWL_STATUS(state, status) {
+      state.bowlsongstatus = status;
     }
   },
   actions: {
     setSongs(context) {
+      context.commit('SET_BOWL_STATUS', AppData.LOADING);
+
       axios
         .get('https://spaceschedule.herokuapp.com/api/bowlsongs')
         .then(response => {
           context.commit('SET_SONGS', response.data.bowlSongs);
+          context.commit('SET_BOWL_STATUS', AppData.SUCCESS);
         })
-        .then(response => {
-          console.log(response);
+        .then(() => {
+          context.commit('SET_BOWL_STATUS', AppData.ERROR);
         });
     }
   },
