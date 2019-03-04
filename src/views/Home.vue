@@ -21,7 +21,7 @@
           </v-card>
         </v-flex>
       </v-layout>
-      <div v-for="post in homeposts" :key="post.id">
+      <div v-for="post in flip" :key="post.id">
         <HomePost
           :Id="post.id"
           :PostDate="post.created_at"
@@ -82,6 +82,11 @@ export default {
     close() {
       this.newpost = false;
       this.newposttop = false;
+    }
+  },
+  computed: {
+    flip() {
+      return this.homeposts.slice().reverse();
     }
   }
 };

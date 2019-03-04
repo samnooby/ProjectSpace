@@ -4,6 +4,7 @@ import axios from 'axios';
 import { AppData } from './Data.js';
 
 Vue.use(Vuex, axios);
+const API = 'https://api-dot-forward-map-233401.appspot.com/api/';
 
 const aboutModule = {
   state: {
@@ -66,13 +67,9 @@ const homeModule = {
       commit('SET_HOME_STATUS', AppData.LOADING);
 
       axios
-        .post(
-          'https://forward-map-233401.appspot.com/api/articles/create',
-          post,
-          {
-            headers: { 'Content-Type': 'multipart/form-data' }
-          }
-        )
+        .post(API + 'articles/create', post, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        })
         .then(response => {
           commit('ADD_POST', response.data.article);
           commit('SET_HOME_STATUS', AppData.SUCCESS);
@@ -85,7 +82,7 @@ const homeModule = {
     setPosts(context) {
       context.commit('SET_HOME_STATUS', AppData.LOADING);
       axios
-        .get('https://forward-map-233401.appspot.com/api/articles')
+        .get(API + 'articles')
         .then(response => {
           context.commit('SET_POSTS', response.data.articles);
           context.commit('SET_HOME_STATUS', AppData.SUCCESS);
@@ -159,7 +156,7 @@ const bowlSongModule = {
       context.commit('SET_BOWL_STATUS', AppData.LOADING);
 
       axios
-        .get('https://forward-map-233401.appspot.com/api/bowlsongs')
+        .get(API + 'bowlsongs')
         .then(response => {
           context.commit('SET_SONGS', response.data.bowlSongs);
           context.commit('SET_BOWL_STATUS', AppData.SUCCESS);
