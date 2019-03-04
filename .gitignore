@@ -19,8 +19,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
-.eslintrc.js
-.prettierrc.js
 
 /assets
 
