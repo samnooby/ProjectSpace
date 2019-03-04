@@ -9,15 +9,16 @@
       </v-toolbar-title>
 
       <v-layout justify-space-around="true" class="hidden-sm-and-down">
-        <v-btn
-          flat
-          v-for="link in links"
-          :key="link.id"
-          router
-          :to="{ name: link.name }"
-          class="text--text secondary"
-          >{{ link.propername }}</v-btn
-        >
+        <div v-for="link in links" :key="link.id">
+          <v-btn
+            flat
+            router
+            :to="{ name: link.name }"
+            class="text--text secondary"
+            v-if="!link.hidden"
+            >{{ link.propername }}</v-btn
+          >
+        </div>
       </v-layout>
 
       <v-spacer class="hidden-md-and-up"></v-spacer>

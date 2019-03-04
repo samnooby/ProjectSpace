@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import AboutPost from '@/components/AboutPost';
+import AboutPost from '@/components/About/AboutPost';
 
 export default {
   components: {

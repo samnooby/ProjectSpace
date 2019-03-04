@@ -1,8 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
 import { AppData } from './Data.js';
 
-Vue.use(Vuex);
+Vue.use(Vuex, axios);
+const API = 'https://api-dot-forward-map-233401.appspot.com/api/';
 
 const aboutModule = {
   state: {
@@ -18,20 +20,15 @@ const aboutModule = {
 
 const homeModule = {
   state: {
-    homeposts: AppData.HomePosts
+    homeposts: [],
+    homestatus: AppData.LOADING
   },
   mutations: {
+    SET_POSTS(state, posts) {
+      state.homeposts = posts;
+    },
     ADD_POST(state, post) {
-      var currentId = Math.max.apply(
-        Math,
-        state.homeposts.map(function(o) {
-          return o.id;
-        })
-      );
-      console.log(currentId);
-      post.id = currentId + 1;
       state.homeposts.push(post);
-      console.log(state.homeposts);
     },
     REMOVE_POST(state, id) {
       var i;
@@ -50,11 +47,49 @@ const homeModule = {
           i = state.homeposts.length;
         }
       }
+    },
+    GET_POST_ID(state, post) {
+      var currentId = Math.max.apply(
+        Math,
+        state.homeposts.map(function(o) {
+          return o.id;
+        })
+      );
+      post.id = currentId + 1;
+    },
+    SET_HOME_STATUS(state, status) {
+      state.homestatus = status;
     }
   },
   actions: {
-    addPost(context, post) {
-      context.commit('ADD_POST', post);
+    addPost({ commit }, post) {
+      commit('GET_POST_ID', post);
+      commit('SET_HOME_STATUS', AppData.LOADING);
+
+      axios
+        .post(API + 'articles/create', post, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        })
+        .then(response => {
+          commit('ADD_POST', response.data.article);
+          commit('SET_HOME_STATUS', AppData.SUCCESS);
+          console.log(response);
+        })
+        .catch(() => {
+          commit('SET_HOME_STATUS', AppData.ERROR);
+        });
+    },
+    setPosts(context) {
+      context.commit('SET_HOME_STATUS', AppData.LOADING);
+      axios
+        .get(API + 'articles')
+        .then(response => {
+          context.commit('SET_POSTS', response.data.articles);
+          context.commit('SET_HOME_STATUS', AppData.SUCCESS);
+        })
+        .catch(() => {
+          context.commit('SET_HOME_STATUS', AppData.ERROR);
+        });
     }
   },
   getters: {
@@ -103,11 +138,47 @@ const projectsModule = {
   }
 };
 
+const bowlSongModule = {
+  state: {
+    songs: [],
+    bowlsongstatus: false
+  },
+  mutations: {
+    SET_SONGS(state, songs) {
+      state.songs = songs;
+    },
+    SET_BOWL_STATUS(state, status) {
+      state.bowlsongstatus = status;
+    }
+  },
+  actions: {
+    setSongs(context) {
+      context.commit('SET_BOWL_STATUS', AppData.LOADING);
+
+      axios
+        .get(API + 'bowlsongs')
+        .then(response => {
+          context.commit('SET_SONGS', response.data.bowlSongs);
+          context.commit('SET_BOWL_STATUS', AppData.SUCCESS);
+        })
+        .then(() => {
+          context.commit('SET_BOWL_STATUS', AppData.ERROR);
+        });
+    }
+  },
+  getters: {
+    getSongs(state) {
+      return state.songs;
+    }
+  }
+};
+
 export default new Vuex.Store({
   modules: {
     home: homeModule,
     projects: projectsModule,
-    about: aboutModule
+    about: aboutModule,
+    bowlsongs: bowlSongModule
   },
   state: {
     links: AppData.Links

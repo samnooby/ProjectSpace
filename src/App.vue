@@ -17,6 +17,7 @@
                   :projects="getProjects"
                   :homeposts="getPosts"
                   :aboutposts="getAbout"
+                  :songs="getSongs"
                   class="mt-3 pa-0 heightfill"
                   style=" overflow: auto; "
                   id="router"
@@ -35,6 +36,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 import Velocity from 'velocity-animate';
 
 export default {
@@ -47,9 +49,16 @@ export default {
     Footer
   },
   computed: {
-    ...mapGetters(['getPosts', 'getLinks', 'getProjects', 'getAbout'])
+    ...mapGetters([
+      'getPosts',
+      'getLinks',
+      'getProjects',
+      'getAbout',
+      'getSongs'
+    ])
   },
   methods: {
+    ...mapActions(['setPosts', 'setSongs']),
     beforeenter(el) {
       el.style.opacity = 0;
     },
@@ -63,6 +72,10 @@ export default {
     leave(el, done) {
       Velocity(el, { opacity: 0 }, { duration: 300, complete: done });
     }
+  },
+  created() {
+    this.setPosts();
+    this.setSongs();
   }
 };
 </script>

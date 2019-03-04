@@ -10,7 +10,7 @@
         <v-layout>
           <v-flex v-if="!flipped" xs4>
             <v-img
-              class="elevation-3"
+              class="elevation-3 background"
               :aspect-ratio="16 / 9"
               v-bind:src="postimg.imageURL"
               style="border-radius: 5px;"
@@ -21,7 +21,7 @@
           </v-flex>
           <v-flex v-if="flipped" xs4>
             <v-img
-              class="elevation-3"
+              class="elevation-3 background"
               :aspect-ratio="16 / 9"
               v-bind:src="postimg.imageURL"
               style="border-radius: 5px;"

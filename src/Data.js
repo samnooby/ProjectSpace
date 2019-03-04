@@ -3,6 +3,7 @@ import About from './views/About.vue';
 import Booking from './views/Booking.vue';
 import BowlSongs from './views/BowlSongs.vue';
 import CurrentProjects from './views/CurrentProjects.vue';
+import ErrorPage from './views/ErrorPage.vue';
 
 export const AppData = {
   Links: [
@@ -10,7 +11,8 @@ export const AppData = {
       path: '/',
       name: 'home',
       propername: 'Home',
-      component: Home
+      component: Home,
+      hidden: true
     },
     {
       path: '/about',
@@ -35,6 +37,13 @@ export const AppData = {
       name: 'currentprojects',
       propername: 'Current Projects',
       component: CurrentProjects
+    },
+    {
+      path: '/ERROR',
+      name: 'error',
+      propername: 'ERROR',
+      component: ErrorPage,
+      hidden: true
     }
   ],
   Projects: [
@@ -80,45 +89,7 @@ export const AppData = {
       title: 'Bowl Song Generator',
       description: 'A app that generates a new song to smoke your bowl to',
       expected: '02/05/2019',
-      progress: 25
-    }
-  ],
-  HomePosts: [
-    {
-      id: 0,
-      date: new Date(),
-      owner: 'sam',
-      text: '<span class="red"> This is a test </span>',
-      img: { imageURL: require('@/static/logo.png') },
-      title: 'The First Post'
-    },
-    {
-      id: 1,
-      date: new Date(),
-      owner: 'sam',
-      text: 'hey the is a test to the site',
-      title: 'The Second Post'
-    },
-    {
-      id: 2,
-      date: new Date(),
-      owner: 'sam',
-      text: 'hey the is a test to the site',
-      title: 'The third Post'
-    },
-    {
-      id: 3,
-      date: new Date(),
-      owner: 'sam',
-      text: 'hey the is a test to the site',
-      title: 'The Fourth Post'
-    },
-    {
-      id: 4,
-      date: new Date(),
-      owner: 'sam',
-      text: 'hey the is a test to the site',
-      title: 'The Fifth Post'
+      progress: 60
     }
   ],
   AboutPage: [
@@ -132,7 +103,10 @@ export const AppData = {
       id: 1,
       owner: 'Luka',
       posttext: 'This is information about Luka',
-      img: { imageURL: require('@/static/logo.png') }
+      img: {
+        imageURL:
+          'https://res.cloudinary.com/lukabuz/image/upload/inzzvhwh6eqifffsrgej'
+      }
     },
     {
       id: 2,
@@ -140,5 +114,8 @@ export const AppData = {
       posttext: 'This is information about Liam',
       img: { imageURL: require('@/static/logo.png') }
     }
-  ]
+  ],
+  LOADING: 0,
+  SUCCESS: 1,
+  FAIL: 2
 };
