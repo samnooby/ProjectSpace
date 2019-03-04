@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import BowlSongGenerator from '@/components/BowlSongs/BowlSongGenerator.vue';
+import BowlSongGenerator from '@/components/BowlSongs/BowlSongGenerator.vue'
 
 export default {
   props: {
@@ -34,7 +34,7 @@ export default {
   components: {
     BowlSongGenerator
   }
-};
+}
 </script>
 
 <style scoped></style>

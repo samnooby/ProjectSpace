@@ -1,8 +1,8 @@
 <template>
   <v-layout wrap row class="primary" align-center>
-    <v-flex xs2 offset-xs1 class="mb-5">
-      <v-btn icon class="pa-2">
-        <v-icon size="65" class="text--text">play_circle_filled</v-icon>
+    <v-flex xs2 offset-xs1 class="mt-3">
+      <v-btn fab dark large class="text--text">
+        <v-icon size="64" dar>play_circle_filled</v-icon>
       </v-btn>
     </v-flex>
     <v-flex xs7>
@@ -13,7 +13,9 @@
             style="background-color: #c2c2cb; border-radius: 5px;"
             class="pa-0"
           >
-            <span class="black--text">Song Title</span>
+            <span class="black--text"
+              >Song Title {{ CurrentSong.songLink }}</span
+            >
           </v-flex>
           <v-flex xs12 class>
             <span class="text--text">Progress Bar</span>
@@ -28,7 +30,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    CurrentSong: {
+      type: Object,
+      required: true
+    }
+  }
+}
 </script>
 
 <style scoped></style>

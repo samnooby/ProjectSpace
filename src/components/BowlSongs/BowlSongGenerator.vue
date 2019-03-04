@@ -1,13 +1,13 @@
 <template>
   <v-layout class="secondary pa-3" style="border-radius: 6px;">
-    <v-flex xs12 class="hidden-xs-only">
-      <PlayBar></PlayBar>
+    <v-flex xs12 class="hidden-xs-only" v-if="getCurrentSong()">
+      <PlayBar :CurrentSong="getCurrentSong()"></PlayBar>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import PlayBar from '@/components/BowlSongs/PlayBar.vue';
+import PlayBar from '@/components/BowlSongs/PlayBar.vue'
 
 export default {
   props: {
@@ -21,10 +21,15 @@ export default {
   },
   data() {
     return {
-      currentSong: this.songs[0]
-    };
+      currentSong: []
+    }
+  },
+  methods: {
+    getCurrentSong() {
+      return this.songs[0]
+    }
   }
-};
+}
 </script>
 
 <style scoped></style>
