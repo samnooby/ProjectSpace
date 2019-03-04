@@ -1,8 +1,8 @@
 <template>
-  <v-layout wrap row class="primary" align-center>
-    <v-flex xs2 offset-xs1 class="mt-3">
+  <v-layout wrap row class="primary pt-3" align-center>
+    <v-flex xs3 class="pa-0 ma-0">
       <v-btn fab dark large class="text--text">
-        <v-icon size="64" dar>play_circle_filled</v-icon>
+        <v-icon size="80" dar>play_circle_filled</v-icon>
       </v-btn>
     </v-flex>
     <v-flex xs7>
@@ -13,15 +13,23 @@
             style="background-color: #c2c2cb; border-radius: 5px;"
             class="pa-0"
           >
-            <span class="black--text"
-              >Song Title {{ CurrentSong.songLink }}</span
-            >
+            <span class="black--text">{{ CurrentSong.songLink }}</span>
           </v-flex>
-          <v-flex xs12 class>
-            <span class="text--text">Progress Bar</span>
+          <v-flex xs12 class="mt-3 mb-0 pa-0">
+            <v-progress-linear
+              v-model="progress"
+              color="info"
+            ></v-progress-linear>
           </v-flex>
-          <v-flex xs12 class>
-            <span class="text--text">FastForward and Rewind</span>
+          <v-flex xs2 offset-xs4 class>
+            <v-btn icon>
+              <v-icon size="30" class="text--text">fast_rewind</v-icon>
+            </v-btn>
+          </v-flex>
+          <v-flex xs2>
+            <v-btn icon>
+              <v-icon size="30" class="text--text">fast_forward</v-icon>
+            </v-btn>
           </v-flex>
         </v-layout>
       </v-container>
@@ -35,6 +43,11 @@ export default {
     CurrentSong: {
       type: Object,
       required: true
+    }
+  },
+  data() {
+    return {
+      progress: 25
     }
   }
 }

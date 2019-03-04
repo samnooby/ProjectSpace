@@ -75,7 +75,6 @@ const homeModule = {
         .then(response => {
           commit('ADD_POST', response.data.article)
           commit('SET_HOME_STATUS', AppData.SUCCESS)
-          console.log(response)
         })
         .catch(() => {
           commit('SET_HOME_STATUS', AppData.ERROR)
@@ -86,6 +85,7 @@ const homeModule = {
       axios
         .get(API + 'articles')
         .then(response => {
+          console.log(response)
           context.commit('SET_POSTS', response.data.articles)
           context.commit('SET_HOME_STATUS', AppData.SUCCESS)
         })

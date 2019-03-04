@@ -12,6 +12,7 @@
               style="height: 100%; display:flex; align-items: center; justify-content:center;"
             >
               <span
+                style="overflow-wrap: break-word;"
                 class="white--text font-weight-medium text-uppercase display-1"
                 >{{ Title }}</span
               >
@@ -30,6 +31,7 @@
                 style="height: 100%; display:flex; align-items: center; justify-content:center;"
               >
                 <span
+                  style="overflow-wrap: break-word;"
                   class="white--text font-weight-medium text-uppercase display-2"
                   >{{ Title }}</span
                 >
@@ -102,15 +104,15 @@ export default {
     }
   },
   data() {
-    return {};
+    return {}
   },
   computed: {},
   methods: {
     hasImage() {
-      return this.FileImage != null;
+      return this.FileImage != null
     }
   }
-};
+}
 </script>
 
 <style scoped>
