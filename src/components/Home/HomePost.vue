@@ -70,17 +70,45 @@
           style="border-radius: 5px;"
           class="background elevation-5 mb-2"
         >
-          <v-text-field
-            class="text--text"
-            v-model="comment"
-            label="Type Comment Here"
-          ></v-text-field>
-          <v-btn @click="addComment">Add Comment</v-btn>
+          <v-layout row wrap>
+            <v-flex xs12 sm2>
+              <v-text-field
+                class="text--text"
+                v-model="author"
+                label="Author"
+              ></v-text-field>
+            </v-flex>
+            <v-flex xs12 offset-sm1 sm9>
+              <v-text-field
+                class="text--text"
+                v-model="comment"
+                label="Type Comment Here"
+              ></v-text-field>
+            </v-flex>
+          </v-layout>
+          <v-btn class="info" round @click="uploadPost">Add Comment</v-btn>
         </v-flex>
+
         <v-flex xs12 v-if="Comments && Comments.length != 0">
-          <v-card>
-            <v-card-text>
-              <h1>{{ Comments[0] }}</h1>
+          <v-card class="secondary">
+            <v-card-text class="secondary">
+              <v-layout row wrap class="secondary">
+                <v-flex xs12 class="secondary">
+                  <v-layout
+                    style="border-radius: 10px;"
+                    class="background mb-2 pb-0 pt-3"
+                    v-for="comment in Comments"
+                    :key="comment.id"
+                  >
+                    <v-flex xs9>
+                      <p class="black--text">{{ comment.text }}</p>
+                    </v-flex>
+                    <v-flex xs3>
+                      <p>Author: {{ comment.author }}</p>
+                    </v-flex>
+                  </v-layout>
+                </v-flex>
+              </v-layout>
             </v-card-text>
           </v-card>
         </v-flex>
@@ -130,16 +158,26 @@ export default {
   },
   data() {
     return {
-      comment: ''
+      comment: '',
+      author: ''
     };
   },
   computed: {},
   methods: {
     ...mapActions(['addComment']),
     hasImage() {
-      this.addComment(this.comment);
+      return this.FileImage != null;
     },
-    addComment() {}
+    uploadPost() {
+      var i = this.Id;
+      var autor = this.author;
+      if (autor == '') {
+        autor = 'Anonymous';
+      }
+      var comment = { text: this.comment, id: i, author: autor };
+
+      this.addComment(comment);
+    }
   }
 };
 </script>
