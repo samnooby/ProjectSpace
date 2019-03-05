@@ -1,10 +1,10 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import axios from 'axios'
-import { AppData } from './Data.js'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import axios from 'axios';
+import { AppData } from './Data.js';
 
-Vue.use(Vuex, axios)
-const API = 'https://api-dot-forward-map-233401.appspot.com/api/'
+Vue.use(Vuex, axios);
+const API = 'https://api-dot-forward-map-233401.appspot.com/api/';
 
 const aboutModule = {
   state: {
@@ -13,10 +13,10 @@ const aboutModule = {
   mutations: {},
   getters: {
     getAbout(state) {
-      return state.aboutData
+      return state.aboutData;
     }
   }
-}
+};
 
 const homeModule = {
   state: {
@@ -25,26 +25,26 @@ const homeModule = {
   },
   mutations: {
     SET_POSTS(state, posts) {
-      state.homeposts = posts
+      state.homeposts = posts;
     },
     ADD_POST(state, post) {
-      state.homeposts.push(post)
+      state.homeposts.push(post);
     },
     REMOVE_POST(state, id) {
-      var i
+      var i;
       for (i = 0; i < state.homeposts.length; i++) {
         if (state.homeposts[i].id == id) {
-          state.homeposts.splice(i, 1)
-          i = state.homeposts.length
+          state.homeposts.splice(i, 1);
+          i = state.homeposts.length;
         }
       }
     },
     UPDATE_POST(state, id, post) {
-      var i
+      var i;
       for (i = 0; i < state.homeposts.length; i++) {
         if (state.homeposts[i].id == id) {
-          state.homeposts[i] = post
-          i = state.homeposts.length
+          state.homeposts[i] = post;
+          i = state.homeposts.length;
         }
       }
     },
@@ -52,19 +52,27 @@ const homeModule = {
       var currentId = Math.max.apply(
         Math,
         state.homeposts.map(function(o) {
-          return o.id
+          return o.id;
         })
-      )
-      post.id = currentId + 1
+      );
+      post.id = currentId + 1;
     },
     SET_HOME_STATUS(state, status) {
-      state.homestatus = status
+      state.homestatus = status;
+    },
+    ADD_COMMENT(state, comment, id) {
+      var post;
+      for (post in state.homeposts) {
+        if (post.id == id) {
+          post.Comments.append(comment);
+        }
+      }
     }
   },
   actions: {
     addPost({ commit }, post) {
-      commit('GET_POST_ID', post)
-      commit('SET_HOME_STATUS', AppData.LOADING)
+      commit('GET_POST_ID', post);
+      commit('SET_HOME_STATUS', AppData.LOADING);
 
       axios
         .post(API + 'articles/create', post, {
@@ -73,33 +81,46 @@ const homeModule = {
           }
         })
         .then(response => {
-          commit('ADD_POST', response.data.article)
-          commit('SET_HOME_STATUS', AppData.SUCCESS)
+          commit('ADD_POST', response.data.article);
+          commit('SET_HOME_STATUS', AppData.SUCCESS);
         })
         .catch(() => {
-          commit('SET_HOME_STATUS', AppData.ERROR)
-        })
+          commit('SET_HOME_STATUS', AppData.ERROR);
+        });
     },
-    setPosts(context) {
-      context.commit('SET_HOME_STATUS', AppData.LOADING)
+    setPosts({ commit }) {
+      commit('SET_HOME_STATUS', AppData.LOADING);
       axios
         .get(API + 'articles')
         .then(response => {
-          console.log(response)
-          context.commit('SET_POSTS', response.data.articles)
-          context.commit('SET_HOME_STATUS', AppData.SUCCESS)
+          commit('SET_POSTS', response.data.articles);
+          commit('SET_HOME_STATUS', AppData.SUCCESS);
         })
         .catch(() => {
-          context.commit('SET_HOME_STATUS', AppData.ERROR)
+          commit('SET_HOME_STATUS', AppData.ERROR);
+        });
+    },
+    addComment({ commit }, comment, id) {
+      commit('SET_HOME_STATUS', AppData.LOADING);
+
+      axios
+        .post(API + 'articles/' + id + '/comment', comment, {})
+        .then(response => {
+          var comments = response.data.comments;
+          commit('ADD_COMMENT', comments[comments.length - 1]);
+          commit('SET_HOME_STATUS', AppData.SUCCESS);
         })
+        .catch(() => {
+          commit('SET_HOME_STATUS', AppData.ERROR);
+        });
     }
   },
   getters: {
     getPosts(state) {
-      return state.homeposts
+      return state.homeposts;
     }
   }
-}
+};
 
 const projectsModule = {
   state: {
@@ -107,38 +128,38 @@ const projectsModule = {
   },
   mutations: {
     ADD_PROJECT(state, project) {
-      state.projects.push(project)
+      state.projects.push(project);
     },
     REMOVE_PROJECT(state, id) {
-      var i
+      var i;
       for (i = 0; i < state.projects.length; i++) {
         if (state.projects[i].id == id) {
-          state.projects.splice(i, 1)
-          i = state.projects.length
+          state.projects.splice(i, 1);
+          i = state.projects.length;
         }
       }
     },
     UPDATE_PROJECT(state, id, project) {
-      var i
+      var i;
       for (i = 0; i < state.projects.length; i++) {
         if (state.projects[i].id == id) {
-          state.projects[i] = project
-          i = state.projects.length
+          state.projects[i] = project;
+          i = state.projects.length;
         }
       }
     }
   },
   actions: {
     addProject(context, project) {
-      context.commit('ADD_PROJECT', project)
+      context.commit('ADD_PROJECT', project);
     }
   },
   getters: {
     getProjects(state) {
-      return state.projects
+      return state.projects;
     }
   }
-}
+};
 
 const bowlSongModule = {
   state: {
@@ -147,33 +168,33 @@ const bowlSongModule = {
   },
   mutations: {
     SET_SONGS(state, songs) {
-      state.songs = songs
+      state.songs = songs;
     },
     SET_BOWL_STATUS(state, status) {
-      state.bowlsongstatus = status
+      state.bowlsongstatus = status;
     }
   },
   actions: {
     setSongs(context) {
-      context.commit('SET_BOWL_STATUS', AppData.LOADING)
+      context.commit('SET_BOWL_STATUS', AppData.LOADING);
 
       axios
         .get(API + 'bowlsongs')
         .then(response => {
-          context.commit('SET_SONGS', response.data.bowlSongs)
-          context.commit('SET_BOWL_STATUS', AppData.SUCCESS)
+          context.commit('SET_SONGS', response.data.bowlSongs);
+          context.commit('SET_BOWL_STATUS', AppData.SUCCESS);
         })
         .then(() => {
-          context.commit('SET_BOWL_STATUS', AppData.ERROR)
-        })
+          context.commit('SET_BOWL_STATUS', AppData.ERROR);
+        });
     }
   },
   getters: {
     getSongs(state) {
-      return state.songs
+      return state.songs;
     }
   }
-}
+};
 
 export default new Vuex.Store({
   modules: {
@@ -189,7 +210,7 @@ export default new Vuex.Store({
   actions: {},
   getters: {
     getLinks: state => {
-      return state.links
+      return state.links;
     }
   }
-})
+});

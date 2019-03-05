@@ -65,10 +65,22 @@
           </v-flex>
         </v-layout>
 
-        <v-flex xs12 v-if="Comments">
+        <v-flex
+          xs12
+          style="border-radius: 5px;"
+          class="background elevation-5 mb-2"
+        >
+          <v-text-field
+            class="text--text"
+            v-model="comment"
+            label="Type Comment Here"
+          ></v-text-field>
+          <v-btn @click="addComment">Add Comment</v-btn>
+        </v-flex>
+        <v-flex xs12 v-if="Comments && Comments.length != 0">
           <v-card>
             <v-card-text>
-              <h1>{{ Comments }}</h1>
+              <h1>{{ Comments[0] }}</h1>
             </v-card-text>
           </v-card>
         </v-flex>
@@ -84,6 +96,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   props: {
     Title: {
@@ -115,15 +129,19 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      comment: ''
+    };
   },
   computed: {},
   methods: {
+    ...mapActions(['addComment']),
     hasImage() {
-      return this.FileImage != null
-    }
+      this.addComment(this.comment);
+    },
+    addComment() {}
   }
-}
+};
 </script>
 
 <style scoped>
