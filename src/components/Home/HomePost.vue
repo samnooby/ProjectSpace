@@ -65,6 +65,14 @@
           </v-flex>
         </v-layout>
 
+        <v-flex xs12 v-if="Comments">
+          <v-card>
+            <v-card-text>
+              <h1>{{ Comments }}</h1>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+
         <v-footer card class="text--text secondary mx-3 px-2">
           <span class="caption">{{ PostDate }}</span>
           <v-spacer></v-spacer>
@@ -101,6 +109,9 @@ export default {
     FileImage: {
       type: String,
       required: false
+    },
+    Comments: {
+      type: Array
     }
   },
   data() {

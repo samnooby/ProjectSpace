@@ -29,6 +29,7 @@
           :FileImage="post.imageLink"
           :Text="post.text"
           :Title="post.title"
+          :Comments="post.comments"
         />
       </div>
     </v-container>
@@ -58,8 +59,8 @@
 </template>
 
 <script>
-import HomePost from '@/components/Home/HomePost';
-import HomeCreate from '@/components/Home/HomeCreate';
+import HomePost from '@/components/Home/HomePost'
+import HomeCreate from '@/components/Home/HomeCreate'
 
 export default {
   components: {
@@ -76,18 +77,18 @@ export default {
     return {
       newpost: false,
       newposttop: false
-    };
+    }
   },
   methods: {
     close() {
-      this.newpost = false;
-      this.newposttop = false;
+      this.newpost = false
+      this.newposttop = false
     }
   },
   computed: {
     flip() {
-      return this.homeposts.slice().reverse();
+      return this.homeposts.slice().reverse()
     }
   }
-};
+}
 </script>
