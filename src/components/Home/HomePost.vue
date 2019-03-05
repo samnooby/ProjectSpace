@@ -70,23 +70,37 @@
           style="border-radius: 5px;"
           class="background elevation-5 mb-2"
         >
-          <v-layout row wrap>
-            <v-flex xs12 sm2>
-              <v-text-field
-                class="text--text"
-                v-model="author"
-                label="Author"
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12 offset-sm1 sm9>
-              <v-text-field
-                class="text--text"
-                v-model="comment"
-                label="Type Comment Here"
-              ></v-text-field>
-            </v-flex>
-          </v-layout>
-          <v-btn class="info" round @click="uploadPost">Add Comment</v-btn>
+          <v-expansion-panel>
+            <v-expansion-panel-content
+              class="background"
+              style="border-radius: 10px;"
+              v-model="creatingcomment"
+            >
+              <template v-slot:header
+                >Create Comment</template
+              >
+              <v-layout row wrap class="mx-2">
+                <v-flex xs12 sm2>
+                  <v-text-field
+                    class="text--text"
+                    v-model="author"
+                    label="Author"
+                    :maxlength="30"
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs12 offset-sm1 sm9>
+                  <v-text-field
+                    class="text--text"
+                    v-model="comment"
+                    label="Type Comment Here"
+                    :minlength="1"
+                    :maxlength="500"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+              <v-btn class="info" round @click="uploadPost">Add Comment</v-btn>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
         </v-flex>
 
         <v-flex xs12 v-if="Comments && Comments.length != 0">
@@ -100,10 +114,10 @@
                     v-for="comment in Comments"
                     :key="comment.id"
                   >
-                    <v-flex xs9>
-                      <p class="black--text">{{ comment.text }}</p>
+                    <v-flex offset-xs1 xs8>
+                      <p class="black--text text-xs-left">{{ comment.text }}</p>
                     </v-flex>
-                    <v-flex xs3>
+                    <v-flex xs2>
                       <p>Author: {{ comment.author }}</p>
                     </v-flex>
                   </v-layout>
@@ -124,7 +138,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from 'vuex'
 
 export default {
   props: {
@@ -159,27 +173,28 @@ export default {
   data() {
     return {
       comment: '',
-      author: ''
-    };
+      author: '',
+      creatingcomment: false
+    }
   },
   computed: {},
   methods: {
     ...mapActions(['addComment']),
     hasImage() {
-      return this.FileImage != null;
+      return this.FileImage != null
     },
     uploadPost() {
-      var i = this.Id;
-      var autor = this.author;
+      var i = this.Id
+      var autor = this.author
       if (autor == '') {
-        autor = 'Anonymous';
+        autor = 'Anonymous'
       }
-      var comment = { text: this.comment, id: i, author: autor };
+      var comment = { text: this.comment, id: i, author: autor }
 
-      this.addComment(comment);
+      this.addComment(comment)
     }
   }
-};
+}
 </script>
 
 <style scoped>
