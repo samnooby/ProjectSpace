@@ -33,16 +33,16 @@
 </template>
 
 <script>
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import { mapGetters } from 'vuex'
-import { mapActions } from 'vuex'
-import Velocity from 'velocity-animate'
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
+import Velocity from 'velocity-animate';
 
 export default {
   name: 'App',
   data() {
-    return {}
+    return {};
   },
   components: {
     Header,
@@ -60,24 +60,24 @@ export default {
   methods: {
     ...mapActions(['setPosts', 'setSongs']),
     beforeenter(el) {
-      el.style.opacity = 0
+      el.style.opacity = 0;
     },
     enter(el, done) {
       Velocity(
         el,
         { opacity: 1 },
         { duration: 300, delay: 300, complete: done }
-      )
+      );
     },
     leave(el, done) {
-      Velocity(el, { opacity: 0 }, { duration: 300, complete: done })
+      Velocity(el, { opacity: 0 }, { duration: 300, complete: done });
     }
   },
   created() {
-    this.setPosts()
-    this.setSongs()
+    this.setPosts();
+    this.setSongs();
   }
-}
+};
 </script>
 
 <style>

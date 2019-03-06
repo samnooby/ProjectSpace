@@ -8,15 +8,16 @@
             v-bind:class="{ 'hidden-sm-and-down': hasImage() }"
             class="my-3"
           >
-            <div
-              style="height: 100%; display:flex; align-items: center; justify-content:center;"
+            <v-layout
+              style="height: 100%; display:block; word-wrap: break-word;"
             >
-              <span
-                style="overflow-wrap: break-word;"
+              <p
+                style="display: block; word-wrap: break-word;"
                 class="white--text font-weight-medium text-uppercase display-1"
-                >{{ Title }}</span
               >
-            </div>
+                {{ Title }}
+              </p>
+            </v-layout>
           </v-flex>
           <v-flex
             xs12
@@ -26,16 +27,19 @@
             v-if="hasImage()"
           >
             <v-img :aspect-ratio="16 / 9" v-bind:src="FileImage">
-              <div
+              <v-layout
                 class="hidden-md-and-up"
-                style="height: 100%; display:flex; align-items: center; justify-content:center;"
+                style="height: 100%; display:block;  word-wrap: break-word;"
+                justify-center
+                align-center
               >
-                <span
-                  style="overflow-wrap: break-word;"
+                <p
+                  style="word-wrap: break-word;"
                   class="white--text font-weight-medium text-uppercase display-2"
-                  >{{ Title }}</span
                 >
-              </div>
+                  {{ Title }}
+                </p>
+              </v-layout>
             </v-img>
           </v-flex>
 
@@ -43,7 +47,7 @@
             <v-card-text>
               <div>
                 <p
-                  style="overflow-wrap: break-word;"
+                  style="word-wrap: break-word;"
                   class="body--text text-xs-left"
                 >
                   {{ Text }}
@@ -55,7 +59,7 @@
             <v-card-text>
               <div>
                 <p
-                  style="overflow-wrap: break-word;"
+                  style="word-wrap: break-word;"
                   class="body--text text-xs-left"
                 >
                   {{ Text }}
@@ -65,67 +69,7 @@
           </v-flex>
         </v-layout>
 
-        <v-flex
-          xs12
-          style="border-radius: 5px;"
-          class="background elevation-5 mb-2"
-        >
-          <v-expansion-panel>
-            <v-expansion-panel-content
-              class="background"
-              style="border-radius: 10px;"
-              v-model="creatingcomment"
-            >
-              <template v-slot:header
-                >Create Comment</template
-              >
-              <v-layout row wrap class="mx-2">
-                <v-flex xs12 sm2>
-                  <v-text-field
-                    class="text--text"
-                    v-model="author"
-                    label="Author"
-                    :maxlength="30"
-                  ></v-text-field>
-                </v-flex>
-                <v-flex xs12 offset-sm1 sm9>
-                  <v-text-field
-                    class="text--text"
-                    v-model="comment"
-                    label="Type Comment Here"
-                    :minlength="1"
-                    :maxlength="500"
-                  ></v-text-field>
-                </v-flex>
-              </v-layout>
-              <v-btn class="info" round @click="uploadPost">Add Comment</v-btn>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-flex>
-
-        <v-flex xs12 v-if="Comments && Comments.length != 0">
-          <v-card class="secondary">
-            <v-card-text class="secondary">
-              <v-layout row wrap class="secondary">
-                <v-flex xs12 class="secondary">
-                  <v-layout
-                    style="border-radius: 10px;"
-                    class="background mb-2 pb-0 pt-3"
-                    v-for="comment in Comments"
-                    :key="comment.id"
-                  >
-                    <v-flex offset-xs1 xs8>
-                      <p class="black--text text-xs-left">{{ comment.text }}</p>
-                    </v-flex>
-                    <v-flex xs2>
-                      <p>Author: {{ comment.author }}</p>
-                    </v-flex>
-                  </v-layout>
-                </v-flex>
-              </v-layout>
-            </v-card-text>
-          </v-card>
-        </v-flex>
+        <CommentsSection :PostId="Id" :Comments="Comments" />
 
         <v-footer card class="text--text secondary mx-3 px-2">
           <span class="caption">{{ PostDate }}</span>
@@ -138,7 +82,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import CommentsSection from '@/components/Home/CommentsSection.vue';
 
 export default {
   props: {
@@ -171,30 +115,16 @@ export default {
     }
   },
   data() {
-    return {
-      comment: '',
-      author: '',
-      creatingcomment: false
-    }
+    return {};
   },
   computed: {},
   methods: {
-    ...mapActions(['addComment']),
     hasImage() {
-      return this.FileImage != null
-    },
-    uploadPost() {
-      var i = this.Id
-      var autor = this.author
-      if (autor == '') {
-        autor = 'Anonymous'
-      }
-      var comment = { text: this.comment, id: i, author: autor }
-
-      this.addComment(comment)
+      return this.FileImage != null;
     }
-  }
-}
+  },
+  components: { CommentsSection }
+};
 </script>
 
 <style scoped>

@@ -15,7 +15,7 @@
             router
             :to="{ name: link.name }"
             class="text--text secondary"
-            v-if="!link.hidden"
+            v-if="link.hidden != true"
             >{{ link.propername }}</v-btn
           >
         </div>

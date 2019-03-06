@@ -14,6 +14,7 @@ Vue.use(Vuetify, {
     error: '#b71c1c',
     info: '#8787a5',
     body: '#9faec6',
-    headerbutton: '#ffffff'
+    headerbutton: '#ffffff',
+    comment: '#44484f'
   }
 });

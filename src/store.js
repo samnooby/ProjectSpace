@@ -60,12 +60,13 @@ const homeModule = {
     SET_HOME_STATUS(state, status) {
       state.homestatus = status;
     },
-    ADD_COMMENT(state, comment, id) {
+    ADD_COMMENT(state, article) {
       var post;
       for (post in state.homeposts) {
-        if (post.id == id) {
-          post.Comments.append(comment);
-          break;
+        if (state.homeposts[post].id == article.id) {
+          state.homeposts[post].comments.push(
+            article.comments[article.comments.length - 1]
+          );
         }
       }
     }
@@ -103,8 +104,6 @@ const homeModule = {
     },
     addComment({ commit }, comment) {
       commit('SET_HOME_STATUS', AppData.LOADING);
-      console.log(comment.text);
-      console.log('In addcomment' + comment.id);
       var d = new FormData();
       d.append('text', comment.text);
       if (comment.author) {
@@ -113,13 +112,11 @@ const homeModule = {
       axios
         .post(API + 'articles/' + comment.id + '/comment', comment)
         .then(response => {
-          console.log(response);
-          var comments = response.data.comments;
-          commit('ADD_COMMENT', comments[comments.length - 1], comment.id);
+          var article = response.data.article;
+          commit('ADD_COMMENT', article);
           commit('SET_HOME_STATUS', AppData.SUCCESS);
         })
-        .catch(err => {
-          console.log(err.response);
+        .catch(() => {
           commit('SET_HOME_STATUS', AppData.ERROR);
         });
     }

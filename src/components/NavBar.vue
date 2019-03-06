@@ -9,14 +9,14 @@
 
     <v-list class="secondary">
       <v-list-tile
-        v-for="link in links"
+        v-for="link in getLinks"
         :key="link.name"
         router
         :to="{ name: link.name }"
         class="ma-2"
       >
-        <v-list-tile-content v-if="!link.hidden">
-          <v-list-tile-title class="white--text">{{
+        <v-list-tile-content>
+          <v-list-tile-title class="text--text">{{
             link.propername
           }}</v-list-tile-title>
         </v-list-tile-content>
@@ -28,10 +28,24 @@
 <script>
 export default {
   props: {
-    links: Array
+    links: {
+      type: Array
+    }
   },
   data() {
     return {};
+  },
+  computed: {
+    getLinks() {
+      var currentLinks = [];
+      var link;
+      for (link in this.links) {
+        if (this.links[link].name != 'error') {
+          currentLinks.push(this.links[link]);
+        }
+      }
+      return currentLinks;
+    }
   }
 };
 </script>
