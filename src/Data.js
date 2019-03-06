@@ -12,38 +12,56 @@ export const AppData = {
       name: 'home',
       propername: 'Home',
       component: Home,
-      hidden: true
+      hidden: true,
+      meta: {
+        title: 'Home Page - Space Force'
+      }
     },
     {
       path: '/about',
       name: 'about',
       propername: 'About',
-      component: About
+      component: About,
+      meta: {
+        title: 'About - Space Force'
+      }
     },
     {
       path: '/booking',
       name: 'booking',
       propername: 'Book Chillout',
-      component: Booking
+      component: Booking,
+      meta: {
+        title: 'Booking - Space Force'
+      }
     },
     {
       path: '/bowlsongs',
       name: 'bowlsongs',
       propername: 'Bowl Songs',
-      component: BowlSongs
+      component: BowlSongs,
+      meta: {
+        title: 'Bowl Songs - Space Force'
+      }
     },
     {
-      path: '/currentprojectsk',
+      path: '/currentprojects',
       name: 'currentprojects',
       propername: 'Current Projects',
-      component: CurrentProjects
+      component: CurrentProjects,
+      meta: {
+        title: 'Current Projects - Space Force'
+      }
     },
     {
       path: '/ERROR',
       name: 'error',
       propername: 'ERROR',
       component: ErrorPage,
-      hidden: true
+      hidden: true,
+      meta: {
+        title: 'ERROR'
+      }
     }
   ],
   Projects: [

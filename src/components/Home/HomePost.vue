@@ -9,12 +9,12 @@
             class="my-3"
           >
             <v-layout
+              white--text
+              font-weight-medium
+              text-uppercase
               style="height: 100%; display:block; word-wrap: break-word;"
             >
-              <p
-                style="display: block; word-wrap: break-word;"
-                class="white--text font-weight-medium text-uppercase display-1"
-              >
+              <p style="display: block; word-wrap: break-word; font-size: 4vw;">
                 {{ Title }}
               </p>
             </v-layout>
@@ -26,19 +26,22 @@
             style="border-radius:3px;"
             v-if="hasImage()"
           >
-            <v-img :aspect-ratio="16 / 9" v-bind:src="FileImage">
-              <v-layout
-                class="hidden-md-and-up"
-                style="height: 100%; display:block;  word-wrap: break-word;"
-                justify-center
-                align-center
-              >
-                <p
-                  style="word-wrap: break-word;"
-                  class="white--text font-weight-medium text-uppercase display-2"
+            <v-img
+              :aspect-ratio="16 / 9"
+              v-bind:src="FileImage"
+              style="margin: auto;"
+            >
+              <v-layout justify-center align-center fill-height>
+                <div
+                  style="width: 100%;  word-break: break-word; font-size: 4vw;"
                 >
-                  {{ Title }}
-                </p>
+                  <p
+                    style="font-size: 4vw;"
+                    class="white--text font-weight-medium text-uppercase hidden-md-and-up"
+                  >
+                    {{ Title }}
+                  </p>
+                </div>
               </v-layout>
             </v-img>
           </v-flex>
@@ -47,7 +50,7 @@
             <v-card-text>
               <div>
                 <p
-                  style="word-wrap: break-word;"
+                  style="font-size: 2vw; word-wrap: break-word;"
                   class="body--text text-xs-left"
                 >
                   {{ Text }}
@@ -59,7 +62,7 @@
             <v-card-text>
               <div>
                 <p
-                  style="word-wrap: break-word;"
+                  style="word-wrap: break-word; "
                   class="body--text text-xs-left"
                 >
                   {{ Text }}
@@ -69,7 +72,7 @@
           </v-flex>
         </v-layout>
 
-        <CommentsSection :PostId="Id" :Comments="Comments" />
+        <CommentsSection class="mt-3" :PostId="Id" :Comments="Comments" />
 
         <v-footer card class="text--text secondary mx-3 px-2">
           <span class="caption">{{ PostDate }}</span>

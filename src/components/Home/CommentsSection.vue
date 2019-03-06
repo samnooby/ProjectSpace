@@ -5,11 +5,10 @@
       style="border-radius: 5px;"
       class="background elevation-5 mb-2"
     >
-      <v-expansion-panel>
+      <v-expansion-panel v-model="creatingcomment">
         <v-expansion-panel-content
           class="background"
           style="border-radius: 10px;"
-          v-model="creatingcomment"
         >
           <template v-slot:header>
             <div class="comment--text">Create Comment</div>
@@ -98,7 +97,7 @@ export default {
     return {
       comment: '',
       author: '',
-      creatingcomment: false,
+      creatingcomment: null,
       openComments: false,
       viewCommentBtnText: 'View All Comments'
     };
@@ -117,7 +116,7 @@ export default {
 
       this.comment = '';
       this.author = '';
-      this.creatingcomment = false;
+      this.creatingcomment = null;
     },
     viewAllComments() {
       this.openComments = !this.openComments;

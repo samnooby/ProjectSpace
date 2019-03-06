@@ -76,6 +76,12 @@ export default {
   created() {
     this.setPosts();
     this.setSongs();
+    document.title = this.$route.meta.title;
+  },
+  watch: {
+    $route(to) {
+      document.title = to.meta.title || 'Space Force';
+    }
   }
 };
 </script>

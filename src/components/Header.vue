@@ -16,6 +16,7 @@
             :to="{ name: link.name }"
             class="text--text secondary"
             v-if="link.hidden != true"
+            @click="newPage(link.meta.title)"
             >{{ link.propername }}</v-btn
           >
         </div>
@@ -54,6 +55,11 @@ export default {
     return {
       drawer: false
     };
+  },
+  methods: {
+    newPage(title) {
+      document.title = title;
+    }
   }
 };
 </script>

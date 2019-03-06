@@ -35,13 +35,16 @@
             </v-flex>
             <v-flex xs2>
               <ImageUploader @input="addImage">
-                <div slot="activator">
+                <v-layout slot="activator" justify-center wrap row>
                   <v-btn class="info">Add Image</v-btn>
-                </div>
+                  <p v-if="hasimage">Image Added</p>
+                </v-layout>
               </ImageUploader>
             </v-flex>
             <v-flex xs2 offset-xs1>
-              <p caption v-if="hasimage" class="mt-3">Image Added</p>
+              <v-btn v-if="hasimage" @click="removeImage" class="info"
+                >Remove Image</v-btn
+              >
             </v-flex>
             <v-flex offset-xs5 xs2>
               <v-btn @click="uploadPost" class="info">Submit</v-btn>
@@ -55,8 +58,8 @@
 </template>
 
 <script>
-import ImageUploader from '@/components/ImageUploader'
-import { mapActions } from 'vuex'
+import ImageUploader from '@/components/ImageUploader';
+import { mapActions } from 'vuex';
 
 export default {
   props: {
@@ -76,17 +79,17 @@ export default {
       postowner: '',
       error: false,
       hasimage: false
-    }
+    };
   },
   methods: {
     ...mapActions(['addPost']),
     addImage(img) {
-      this.postpic = img
-      this.hasimage = true
+      this.postpic = img;
+      this.hasimage = true;
     },
     uploadPost() {
-      var d = new Date()
-      var post = new FormData()
+      var d = new Date();
+      var post = new FormData();
 
       var makeDate =
         d.getFullYear() +
@@ -99,43 +102,47 @@ export default {
         ':' +
         d.getMinutes() +
         ':' +
-        d.getSeconds()
+        d.getSeconds();
       if (this.posttitle == '') {
-        this.error = true
+        this.error = true;
       } else if (this.posttext == '') {
-        this.error = true
+        this.error = true;
       } else {
-        var owner = this.postowner
+        var owner = this.postowner;
         if (owner == '') {
-          owner = 'Anonymous'
+          owner = 'Anonymous';
         }
 
         if (this.postpic != null) {
-          post.append('image', this.postpic)
+          post.append('image', this.postpic);
         }
-        post.append('created_at', makeDate)
-        post.append('owner', owner)
-        post.append('text', this.posttext)
-        post.append('title', this.posttitle)
-        post.append('id', -1)
+        post.append('created_at', makeDate);
+        post.append('owner', owner);
+        post.append('text', this.posttext);
+        post.append('title', this.posttitle);
+        post.append('id', -1);
 
-        this.addPost(post)
+        this.addPost(post);
 
-        this.postowner = ''
-        this.posttext = ''
-        this.posttitle = ''
-        this.postpic = null
-        this.newpost = false
-        this.hasimage = false
+        this.postowner = '';
+        this.posttext = '';
+        this.posttitle = '';
+        this.postpic = null;
+        this.newpost = false;
+        this.hasimage = false;
 
-        this.closeMenu()
+        this.closeMenu();
       }
     },
     closeMenu() {
-      this.$emit('closemenu', true)
+      this.$emit('closemenu', true);
+    },
+    removeImage() {
+      this.postpic = null;
+      this.hasimage = false;
     }
   }
-}
+};
 </script>
 
 <style scoped></style>
