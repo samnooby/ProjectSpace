@@ -6,7 +6,9 @@
           <v-card flat class="background">
             <v-card-title>
               <v-layout align-center justify-center>
-                <h1 class="display-1 text--text">Bowl Song Generator</h1>
+                <h1 style="font-size: 6vw;" class="text--text">
+                  Bowl Song Generator
+                </h1>
               </v-layout>
             </v-card-title>
             <v-card-text>
@@ -22,7 +24,7 @@
 </template>
 
 <script>
-import BowlSongGenerator from '@/components/BowlSongs/BowlSongGenerator.vue'
+import BowlSongGenerator from '@/components/BowlSongs/BowlSongGenerator.vue';
 
 export default {
   props: {
@@ -34,7 +36,7 @@ export default {
   components: {
     BowlSongGenerator
   }
-}
+};
 </script>
 
 <style scoped></style>

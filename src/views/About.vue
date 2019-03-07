@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="background router-page">
-      <h1 class="text--text display-3">About The Space Force</h1>
+      <h1 class="text--text" style="font-size: 6vw;">About The Space Force</h1>
       <v-container class="my-2 text--text">
         <div v-for="post in aboutposts" :key="post.id" class="pa-3 background">
           <AboutPost

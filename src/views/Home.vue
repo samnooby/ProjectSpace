@@ -1,6 +1,13 @@
 <template>
-  <div class="background router-page homePage" id="home" v-on:scroll.passive="onScroll">
-    <h1 class="text--text display-3">Welcome to the SpaceForce</h1>
+  <div
+    class="background router-page"
+    id="home"
+    ref="homeContainer"
+    v-on:scroll.passive="onScroll"
+  >
+    <h1 class="text--text" style="font-size: 6vw;">
+      Welcome to the SpaceForce
+    </h1>
     <v-container class="my-2 text--text">
       <v-layout v-bind:class="{ createHeader: scroll }">
         <v-flex xs12 class="secondary">
@@ -11,14 +18,18 @@
                   <h1>Create Post</h1>
                 </template>
                 <v-card>
-                  <HomeCreate :hastitle="false" @closemenu="close"/>
+                  <HomeCreate :hastitle="false" @closemenu="close" />
                 </v-card>
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-card>
         </v-flex>
       </v-layout>
-      <div v-for="post in flip" :key="post.id" style="postition: relative; z-index: 10;">
+      <div
+        v-for="post in flip"
+        :key="post.id"
+        style="postition: relative; z-index: 10;"
+      >
         <HomePost
           :Id="post.id"
           :PostDate="post.created_at"
@@ -33,7 +44,7 @@
 
     <v-layout row justify-center>
       <v-dialog v-model="newpost" style="border-radius:3px;">
-        <HomeCreate @closemenu="close"/>
+        <HomeCreate @closemenu="close" />
       </v-dialog>
     </v-layout>
 
@@ -44,7 +55,9 @@
       <v-tooltip top>
         <template #activator="data">
           <v-btn icon large @click="newpost = true">
-            <v-icon size="60" class="text--text" v-on="data.on">add_circle</v-icon>
+            <v-icon size="60" class="text--text" v-on="data.on"
+              >add_circle</v-icon
+            >
           </v-btn>
         </template>
         <span>Make New Post</span>
@@ -81,8 +94,7 @@ export default {
       this.newposttop = null;
     },
     onScroll() {
-      var elmnt = document.getElementsByClassName('homePage');
-      if (elmnt[0] && elmnt[0].scrollTop > 200) {
+      if (this.$refs.homeContainer.scrollTop > 200) {
         this.scroll = true;
       } else {
         this.scroll = false;

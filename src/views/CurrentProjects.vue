@@ -1,6 +1,6 @@
 <template>
   <div class="background router-page">
-    <h1 class="text--text display-3">CurrentProjects</h1>
+    <h1 class="text--text" style="font-size: 6vw;">CurrentProjects</h1>
     <v-container class="my-2">
       <div v-for="project in projects" :key="project.id">
         <v-card
