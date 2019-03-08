@@ -6,6 +6,7 @@ import CurrentProjects from './views/CurrentProjects.vue';
 import ErrorPage from './views/ErrorPage.vue';
 
 export const AppData = {
+  errorMessage: '',
   Links: [
     {
       path: '/',

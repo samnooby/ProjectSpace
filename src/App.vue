@@ -1,6 +1,6 @@
 <template>
   <v-app class="primary ma-0 pa-0">
-    <Header :links="getLinks" class="mb-5" />
+    <Header :links="getLinks" class="mb-5"/>
     <div class="pl-0 pr-0 mb-5" style="height: 82vh;">
       <v-container class="mt-2 pa-0 heightfill">
         <v-layout row wrap class="heightfill">
@@ -28,7 +28,7 @@
         </v-layout>
       </v-container>
     </div>
-    <Footer />
+    <Footer/>
   </v-app>
 </template>
 

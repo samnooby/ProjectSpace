@@ -212,7 +212,11 @@ export default new Vuex.Store({
   state: {
     links: AppData.Links
   },
-  mutations: {},
+  mutations: {
+    SET_ERROR_MESSAGE(state, message) {
+      state.errorMessage = message;
+    }
+  },
   actions: {},
   getters: {
     getLinks: state => {

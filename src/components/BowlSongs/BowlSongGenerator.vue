@@ -1,16 +1,15 @@
 <template>
   <v-layout class="secondary pa-3" style="border-radius: 6px;">
-    <v-flex xs12 class="hidden-xs-only" v-if="getCurrentSong()">
-      <PlayBar :CurrentSong="getCurrentSong()"></PlayBar>
-      <SongLists :songslist="songs"></SongLists>
-      <VideoPlayer :videoLink="songs[0]2"></VideoPlayer>
+    <v-flex xs12 class="hidden-xs-only">
+      <VideoPlayer v-if="songSelected" :videoLink="getCurrentSong()" v-on:closePlayer="closePlayer"></VideoPlayer>
+      <SongLists v-on:songSelected="playSong" :songslist="songs"></SongLists>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import PlayBar from '@/components/BowlSongs/PlayBar.vue';
 import SongLists from '@/components/BowlSongs/SongLists.vue';
+import VideoPlayer from '@/components/BowlSongs/VideoPlayer.vue';
 
 export default {
   props: {
@@ -20,17 +19,26 @@ export default {
     }
   },
   components: {
-    PlayBar,
-    SongLists
+    SongLists,
+    VideoPlayer
   },
   data() {
     return {
-      currentSong: []
+      currentSong: {},
+      songSelected: false
     };
   },
   methods: {
     getCurrentSong() {
-      return this.songs[0];
+      return this.currentSong;
+    },
+    playSong(song) {
+      this.currentSong = song;
+      this.songSelected = true;
+    },
+    closePlayer() {
+      this.currentSong = {};
+      this.songSelected = false;
     }
   }
 };

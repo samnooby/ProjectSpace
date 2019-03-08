@@ -6,9 +6,7 @@
           <v-card flat class="background">
             <v-card-title>
               <v-layout align-center justify-center>
-                <h1 style="font-size: 6vw;" class="text--text">
-                  Bowl Song Generator
-                </h1>
+                <h1 style="font-size: 6vw;" class="text--text">Bowl Song Generator</h1>
               </v-layout>
             </v-card-title>
             <v-card-text>
