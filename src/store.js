@@ -201,8 +201,7 @@ const bowlSongModule = {
         .then(err => {
           commit('SET_BOWL_STATUS', AppData.ERROR);
         });
-    },
-    addSongDetails({ state, commit }) {}
+    }
   },
   getters: {
     getSongs(state) {

@@ -7,7 +7,7 @@
         :videoLink="getCurrentSong()"
         v-on:closePlayer="closePlayer"
       ></VideoPlayer>
-      <SongLists v-on:songSelected="playSong" :songslist="songs"></SongLists>
+      <SongLists v-if="songs.length != 0" v-on:songSelected="playSong" :songslist="songs"></SongLists>
     </v-flex>
   </v-layout>
 </template>
