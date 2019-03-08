@@ -67,8 +67,8 @@ export default {
     },
     getId() {
       var id = this.$youtube.getIdFromUrl(this.videoLink.songLink);
-      //const regex = /^(https?:\/\/)?(www.)?you.*\/(watch\?v=)?(.*)/;
-      //const match = regex.exec(this.videoLink.songLink);
+      // const regex = /^(https?:\/\/)?(www.)?you.*\/(watch\?v=)?(.*)/;
+      // const match = regex.exec(this.videoLink.songLink);
       if (id) {
         return id;
       } else {

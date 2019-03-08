@@ -1,7 +1,12 @@
 <template>
   <v-layout class="secondary pa-3" style="border-radius: 6px;">
-    <v-flex xs12 class="hidden-xs-only">
-      <VideoPlayer v-if="songSelected" :videoLink="getCurrentSong()" v-on:closePlayer="closePlayer"></VideoPlayer>
+    <v-flex xs12>
+      <VideoPlayer
+        class="hidden-xs-only"
+        v-if="songSelected"
+        :videoLink="getCurrentSong()"
+        v-on:closePlayer="closePlayer"
+      ></VideoPlayer>
       <SongLists v-on:songSelected="playSong" :songslist="songs"></SongLists>
     </v-flex>
   </v-layout>
@@ -33,6 +38,7 @@ export default {
       return this.currentSong;
     },
     playSong(song) {
+      console.log(song);
       this.currentSong = song;
       this.songSelected = true;
     },

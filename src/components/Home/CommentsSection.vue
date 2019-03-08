@@ -1,26 +1,14 @@
 <template>
   <v-layout row wrap>
-    <v-flex
-      xs12
-      style="border-radius: 5px;"
-      class="background elevation-5 mb-2"
-    >
+    <v-flex xs12 style="border-radius: 5px;" class="background elevation-5 mb-2">
       <v-expansion-panel v-model="creatingcomment">
-        <v-expansion-panel-content
-          class="background"
-          style="border-radius: 10px;"
-        >
+        <v-expansion-panel-content class="background" style="border-radius: 10px;">
           <template v-slot:header>
             <div class="comment--text">Create Comment</div>
           </template>
           <v-layout row wrap class="mx-2">
             <v-flex xs12 sm2>
-              <v-text-field
-                class="text--text"
-                v-model="author"
-                label="Author"
-                :maxlength="30"
-              ></v-text-field>
+              <v-text-field class="text--text" v-model="author" label="Author" :maxlength="30"></v-text-field>
             </v-flex>
             <v-flex xs12 offset-sm1 sm9>
               <v-text-field
@@ -52,14 +40,13 @@
                   <p
                     class="comment--text text-xs-left"
                     style="word-wrap: break-word;"
-                  >
-                    {{ comment.text }}
-                  </p>
+                  >{{ comment.text }}</p>
                 </v-flex>
                 <v-flex xs2>
-                  <p style="word-wrap: break-word;" class="comment--text">
-                    Author: {{ comment.author }}
-                  </p>
+                  <p
+                    style="word-wrap: break-word;"
+                    class="comment--text"
+                  >Author: {{ comment.author }}</p>
                 </v-flex>
               </v-layout>
               <v-flex v-if="Comments.length > 5" xs12>
@@ -67,8 +54,7 @@
                   <v-btn
                     @click="viewAllComments"
                     class="background comment--text"
-                    >{{ viewCommentBtnText }}</v-btn
-                  >
+                  >{{ viewCommentBtnText }}</v-btn>
                 </div>
               </v-flex>
             </v-flex>
@@ -85,7 +71,6 @@ import { mapActions } from 'vuex';
 export default {
   props: {
     Comments: {
-      type: Array,
       required: true
     },
     PostId: {

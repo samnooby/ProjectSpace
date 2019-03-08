@@ -8,29 +8,13 @@
         <v-container grid>
           <v-layout row wrap>
             <v-flex xs12 sm5>
-              <v-text-field
-                v-model="posttitle"
-                label="Post Title*"
-                required
-                dark
-                :maxlength="70"
-              ></v-text-field>
+              <v-text-field v-model="posttitle" label="Post Title*" required dark :maxlength="70"></v-text-field>
             </v-flex>
             <v-flex xs12 offset-sm1 sm5>
-              <v-text-field
-                v-model="postowner"
-                label="Post Owner"
-                dark
-                :maxlength="50"
-              ></v-text-field>
+              <v-text-field v-model="postowner" label="Post Owner" dark :maxlength="50"></v-text-field>
             </v-flex>
             <v-flex xs12>
-              <v-textarea
-                v-model="posttext"
-                label="Post Text*"
-                dark
-                :maxlength="500"
-              ></v-textarea>
+              <v-textarea v-model="posttext" label="Post Text*" dark :maxlength="500"></v-textarea>
             </v-flex>
             <v-flex xs2>
               <ImageUploader @input="addImage">
@@ -41,17 +25,13 @@
               </ImageUploader>
             </v-flex>
             <v-flex xs2 offset-xs1>
-              <v-btn v-if="hasimage" @click="removeImage" class="info"
-                >Remove Image</v-btn
-              >
+              <v-btn v-if="hasimage" @click="removeImage" class="info">Remove Image</v-btn>
             </v-flex>
             <v-flex class="hidden-xs-only" offset-xs2 xs2>
               <v-btn @click="uploadPost" class="info">Submit</v-btn>
             </v-flex>
             <v-flex offset-xs1 xs2>
-              <v-btn class="info hidden-sm-and-up" @click="uploadPost"
-                >Submit</v-btn
-              >
+              <v-btn class="info hidden-sm-and-up" @click="uploadPost">Submit</v-btn>
               <v-btn @click="closeMenu" class="info">Close</v-btn>
             </v-flex>
           </v-layout>
@@ -61,9 +41,7 @@
 
     <v-dialog v-model="errorDialog">
       <v-card class="background">
-        <v-card-text class="text-xs-center"
-          >Error: {{ errorMessage }}</v-card-text
-        >
+        <v-card-text class="text-xs-center">Error: {{ errorMessage }}</v-card-text>
         <v-card-actions>
           <v-layout justify-center align-center>
             <v-btn class="info" @click="errorDialog = false">Got it!</v-btn>
@@ -77,6 +55,7 @@
 <script>
 import ImageUploader from '@/components/ImageUploader';
 import { mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   props: {
@@ -151,6 +130,9 @@ export default {
       this.postpic = null;
       this.hasimage = false;
     }
+  },
+  computed: {
+    ...mapGetters(['getHomeStatus', 'getErrorMessage'])
   }
 };
 </script>

@@ -60,6 +60,9 @@ const homeModule = {
     SET_HOME_STATUS(state, status) {
       state.homestatus = status;
     },
+    GET_HOME_STATUS(state) {
+      return state.homestatus;
+    },
     ADD_COMMENT(state, article) {
       var post;
       for (post in state.homeposts) {
@@ -86,7 +89,8 @@ const homeModule = {
           commit('ADD_POST', response.data.article);
           commit('SET_HOME_STATUS', AppData.SUCCESS);
         })
-        .catch(() => {
+        .catch(err => {
+          var errorText = err.response.data.errors[0];
           commit('SET_HOME_STATUS', AppData.ERROR);
         });
     },
@@ -98,7 +102,7 @@ const homeModule = {
           commit('SET_POSTS', response.data.articles);
           commit('SET_HOME_STATUS', AppData.SUCCESS);
         })
-        .catch(() => {
+        .catch(err => {
           commit('SET_HOME_STATUS', AppData.ERROR);
         });
     },
@@ -116,7 +120,7 @@ const homeModule = {
           commit('ADD_COMMENT', article);
           commit('SET_HOME_STATUS', AppData.SUCCESS);
         })
-        .catch(() => {
+        .catch(err => {
           commit('SET_HOME_STATUS', AppData.ERROR);
         });
     }
@@ -124,6 +128,9 @@ const homeModule = {
   getters: {
     getPosts(state) {
       return state.homeposts;
+    },
+    getHomeStatus(state) {
+      return state.homestatus;
     }
   }
 };
@@ -178,22 +185,24 @@ const bowlSongModule = {
     },
     SET_BOWL_STATUS(state, status) {
       state.bowlsongstatus = status;
-    }
+    },
+    ADD_SONG_DETAILS(state, id, title, chanel) {}
   },
   actions: {
-    setSongs(context) {
-      context.commit('SET_BOWL_STATUS', AppData.LOADING);
+    setSongs({ commit }) {
+      commit('SET_BOWL_STATUS', AppData.LOADING);
 
       axios
         .get(API + 'bowlsongs')
         .then(response => {
-          context.commit('SET_SONGS', response.data.bowlSongs);
-          context.commit('SET_BOWL_STATUS', AppData.SUCCESS);
+          commit('SET_SONGS', response.data.bowlSongs);
+          commit('SET_BOWL_STATUS', AppData.SUCCESS);
         })
-        .then(() => {
-          context.commit('SET_BOWL_STATUS', AppData.ERROR);
+        .then(err => {
+          commit('SET_BOWL_STATUS', AppData.ERROR);
         });
-    }
+    },
+    addSongDetails({ state, commit }) {}
   },
   getters: {
     getSongs(state) {
@@ -217,10 +226,19 @@ export default new Vuex.Store({
       state.errorMessage = message;
     }
   },
-  actions: {},
+  actions: {
+    resetErrorMessage({ commit }) {
+      commit('SET_ERROR_MESSAGE', '');
+    }
+  },
   getters: {
     getLinks: state => {
       return state.links;
+    },
+    getErrorMessage: state => {
+      return state.errorMessage;
     }
   }
 });
+
+function getId(youtubeLink) {}
