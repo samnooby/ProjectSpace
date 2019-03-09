@@ -9,7 +9,9 @@
     >
       <v-layout row wrap class="py-2 my-1 primary" style="border-radius: 5px;">
         <v-flex xs12 md5 class="text--text">Author: {{ song.songLink }}</v-flex>
-        <v-flex xs12 md7 class="text--text" v-if="reGetTitles()">Song Title: {{ song.songtitle }}</v-flex>
+        <v-flex xs12 md7 class="text--text" v-if="reGetTitles()"
+          >Song Title: {{ song.songtitle }}</v-flex
+        >
       </v-layout>
     </v-flex>
   </v-layout>
@@ -41,10 +43,10 @@ export default {
       return new Promise(async resolve => {
         var currentsong = song;
         var youtubeId = this.$youtube.getIdFromUrl(currentsong.songLink);
-        var youtubeKey = 'AIzaSyAB8vFaI3ti0GF6NIVS5-EkuIfONy7CsH8';
+        var youtubeKey = '';
         var youtubeURL = 'https://www.googleapis.com/youtube/v3/videos';
 
-        var response = await axios
+        await axios
           .get(youtubeURL, {
             params: {
               id: youtubeId,
@@ -74,11 +76,10 @@ export default {
       return true;
     }
   },
-  async created() {
+  async mounted() {
     for (var i = 0; i < this.songslist.length; i++) {
       this.songslist[i].songtitle = await this.getSongTitle(this.songslist[i]);
     }
-    console.log(this.songslist);
   }
 };
 </script>

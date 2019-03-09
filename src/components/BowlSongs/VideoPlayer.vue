@@ -2,7 +2,11 @@
   <v-container>
     <v-layout row wrap>
       <v-flex xs12 class="mb-3">
-        <PlayBar ref="playbar" v-on:playvideo="playVideo" :CurrentSong="videoLink"></PlayBar>
+        <PlayBar
+          ref="playbar"
+          v-on:playvideo="playVideo"
+          :CurrentSong="videoLink"
+        ></PlayBar>
       </v-flex>
       <v-flex xs12>
         <youtube
@@ -14,13 +18,20 @@
         ></youtube>
       </v-flex>
       <v-flex xs12>
-        <v-btn class="info mt-2 pa-2" style="border-radius: 3px;" @click="closePlayer">Close Player</v-btn>
+        <v-btn
+          class="info mt-2 pa-2"
+          style="border-radius: 3px;"
+          @click="closePlayer"
+          >Close Player</v-btn
+        >
       </v-flex>
     </v-layout>
 
     <v-dialog v-model="isError">
       <v-card class="background">
-        <v-card-text class="text-xs-center">Error: {{ errorMessage }}</v-card-text>
+        <v-card-text class="text-xs-center"
+          >Error: {{ errorMessage }}</v-card-text
+        >
         <v-card-actions>
           <v-layout justify-center align-center>
             <v-btn class="info" @click="closePlayer">Ok</v-btn>
