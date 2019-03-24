@@ -11,7 +11,7 @@
             </v-card-title>
             <v-card-text>
               <v-layout>
-                <BowlSongGenerator :songs="songs"></BowlSongGenerator>
+                <BowlSongGenerator :songs="getSongs"></BowlSongGenerator>
               </v-layout>
             </v-card-text>
           </v-card>
@@ -23,16 +23,25 @@
 
 <script>
 import BowlSongGenerator from '@/components/BowlSongs/BowlSongGenerator.vue';
+import { mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
-  props: {
-    songs: {
-      type: Array,
-      required: true
-    }
+  props: {},
+  data() {
+    return {
+      songs: []
+    };
   },
-  components: {
+  computed: {
+    ...mapGetters(['getSongs']),
     BowlSongGenerator
+  },
+  methods: {
+    ...mapActions(['setSongs'])
+  },
+  created() {
+    this.setSongs();
   }
 };
 </script>

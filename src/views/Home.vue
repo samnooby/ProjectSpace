@@ -2,7 +2,7 @@
   <div class="background router-page" id="home" ref="homeContainer" v-on:scroll.passive="onScroll">
     <h1 class="text--text" style="font-size: 6vw;">Welcome to the SpaceForce</h1>
     <v-container class="my-2 text--text">
-      <v-layout v-bind:class="{ 'createHeader': scroll, 'px-2': scroll }">
+      <v-layout v-bind:class="{ 'createHeader px-4': scroll }">
         <v-flex xs12 class="secondary">
           <v-card class="secondary">
             <v-expansion-panel class="hidden-sm-and-down" v-model="newposttop">
@@ -81,7 +81,7 @@ export default {
       this.newposttop = null;
     },
     onScroll() {
-      if (this.$refs.homeContainer.scrollTop > 200) {
+      if (this.$refs.homeContainer.scrollTop > 315) {
         this.scroll = true;
       } else {
         this.scroll = false;

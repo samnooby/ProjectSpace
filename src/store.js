@@ -1,10 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
-import { AppData } from './Data.js';
+import {
+  AppData
+} from './Data.js';
 
 Vue.use(Vuex, axios);
 const API = 'https://api-dot-forward-map-233401.appspot.com/api/';
+const YoutubeApi = 'https://www.googleapis.com/youtube/v3/videos';
+const YoutubeKey = 'AIzaSyDbSnAlAaREna4hUhb3hYAQFM4GAZOJdhE';
 
 const aboutModule = {
   state: {
@@ -51,7 +55,7 @@ const homeModule = {
     GET_POST_ID(state, post) {
       var currentId = Math.max.apply(
         Math,
-        state.homeposts.map(function(o) {
+        state.homeposts.map(function (o) {
           return o.id;
         })
       );
@@ -75,7 +79,9 @@ const homeModule = {
     }
   },
   actions: {
-    addPost({ commit }, post) {
+    addPost({
+      commit
+    }, post) {
       commit('GET_POST_ID', post);
       commit('SET_HOME_STATUS', AppData.LOADING);
 
@@ -89,12 +95,13 @@ const homeModule = {
           commit('ADD_POST', response.data.article);
           commit('SET_HOME_STATUS', AppData.SUCCESS);
         })
-        .catch(err => {
-          var errorText = err.response.data.errors[0];
+        .catch(() => {
           commit('SET_HOME_STATUS', AppData.ERROR);
         });
     },
-    setPosts({ commit }) {
+    async setPosts({
+      commit
+    }) {
       commit('SET_HOME_STATUS', AppData.LOADING);
       axios
         .get(API + 'articles')
@@ -102,11 +109,13 @@ const homeModule = {
           commit('SET_POSTS', response.data.articles);
           commit('SET_HOME_STATUS', AppData.SUCCESS);
         })
-        .catch(err => {
+        .catch(() => {
           commit('SET_HOME_STATUS', AppData.ERROR);
         });
     },
-    addComment({ commit }, comment) {
+    addComment({
+      commit
+    }, comment) {
       commit('SET_HOME_STATUS', AppData.LOADING);
       var d = new FormData();
       d.append('text', comment.text);
@@ -120,7 +129,7 @@ const homeModule = {
           commit('ADD_COMMENT', article);
           commit('SET_HOME_STATUS', AppData.SUCCESS);
         })
-        .catch(err => {
+        .catch(() => {
           commit('SET_HOME_STATUS', AppData.ERROR);
         });
     }
@@ -186,22 +195,58 @@ const bowlSongModule = {
     SET_BOWL_STATUS(state, status) {
       state.bowlsongstatus = status;
     },
-    ADD_SONG_DETAILS(state, id, title, chanel) {}
+    async ADD_SONG(state, song) {
+      state.songs.push(song);
+    }
   },
   actions: {
-    setSongs({ commit }) {
+    async setSongs({
+      commit
+    }) {
       commit('SET_BOWL_STATUS', AppData.LOADING);
+      var songsList;
 
       axios
         .get(API + 'bowlsongs')
-        .then(response => {
-          commit('SET_SONGS', response.data.bowlSongs);
-          commit('SET_BOWL_STATUS', AppData.SUCCESS);
+        .then(async (response) => {
+          songsList = response.data.bowlSongs;
+          var listLength = songsList.length;
+
+          for (var i = 0; i < listLength; i++) {
+            var currentSong = songsList[i];
+            var youtubeId = getId(currentSong.songLink);
+            var songTitle;
+
+            await axios
+              .get(YoutubeApi, {
+                params: {
+                  id: youtubeId,
+                  key: YoutubeKey,
+                  part: 'snippet'
+                }
+              })
+              .then((response) => {
+
+                if (response != null) {
+                  songTitle = response.data.items[0].snippet.title;
+                  currentSong.title = songTitle;
+
+                  commit('ADD_SONG', currentSong);
+                  commit('SET_BOWL_STATUS', AppData.SUCCESS);
+                } else {
+                  commit('SET_BOWL_STATUS', AppData.ERROR);
+                }
+              })
+              .catch(err => {
+                console.log(err.response);
+              });
+
+          }
         })
-        .then(err => {
+        .catch(() => {
           commit('SET_BOWL_STATUS', AppData.ERROR);
         });
-    }
+    },
   },
   getters: {
     getSongs(state) {
@@ -226,7 +271,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    resetErrorMessage({ commit }) {
+    resetErrorMessage({
+      commit
+    }) {
       commit('SET_ERROR_MESSAGE', '');
     }
   },
@@ -240,4 +287,8 @@ export default new Vuex.Store({
   }
 });
 
-function getId(youtubeLink) {}
+function getId(youtubeLink) {
+  const regex = /^(https?:\/\/)?(www.)?you.*\/(watch\?v=)?(.*)/;
+  const match = regex.exec(youtubeLink);
+  return match[4];
+}
