@@ -8,7 +8,7 @@ import {
 Vue.use(Vuex, axios);
 const API = 'https://api-dot-forward-map-233401.appspot.com/api/';
 const YoutubeApi = 'https://www.googleapis.com/youtube/v3/videos';
-const YoutubeKey = 'AIzaSyDbSnAlAaREna4hUhb3hYAQFM4GAZOJdhE';
+const YoutubeKey = '';
 
 const aboutModule = {
   state: {
